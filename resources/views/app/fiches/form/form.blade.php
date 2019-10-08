@@ -1,0 +1,31 @@
+<form method="POST" action="/fiches/store" class="form" id="fiche-form">
+    @csrf
+    @if( \Request::route()->getName() != 'fiche.create' )
+    <input type="hidden" name="id" id="id" value="">
+    @endif
+    @include('app.fiches.form.rendez-vous')
+    @include('app.fiches.form.prospect')
+    @include('app.fiches.form.adresse')
+    @include('app.fiches.form.situation')
+    @include('app.fiches.form.impot')
+    @include('app.fiches.form.credit')
+    @include('app.fiches.form.confirmation')
+    @include('app.fiches.form.commentaire')
+    <div class="row">
+
+    
+        @if( \Request::route()->getName() != 'fiche.create' ) 
+            
+                @include('app.fiches.form.status')
+                @include('app.fiches.form.date-heure-rappel')
+                @include('app.fiches.form.email-partenaire')
+            
+        @endif
+        
+        
+    </div>
+    <div class="row">
+        @include('app.fiches.form.submit')
+    </div>
+        
+</form> 

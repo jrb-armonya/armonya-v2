@@ -1,0 +1,311 @@
+@font-face {
+  font-family: 'ui-icons';
+  src: url('../fonts/ui-icons-11593179.eot');
+  src: url('../fonts/ui-icons-11593179.eot#iefix') format('embedded-opentype'),
+       url('../fonts/ui-icons-11593179.woff2') format('woff2'),
+       url('../fonts/ui-icons-11593179.woff') format('woff'),
+       url('../fonts/ui-icons-11593179.ttf') format('truetype'),
+       url('../fonts/ui-icons-11593179.svg#ui-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'ui-icons';
+    src: url('../fonts/ui-icons-11593179.svg#ui-icons') format('svg');
+  }
+}
+*/
+ 
+ [class^="ui-"]:before, [class*=" ui-"]:before {
+  font-family: "ui-icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.ui-email:before { content: '\e800'; } /* '' */
+.ui-pin:before { content: '\e801'; } /* '' */
+.ui-quotes:before { content: '\e802'; } /* '' */
+.ui-search:before { content: '\e803'; } /* '' */
+.ui-arrow-right:before { content: '\e804'; } /* '' */
+.ui-star:before { content: '\e805'; } /* '' */
+.ui-star-empty:before { content: '\e806'; } /* '' */
+.ui-twitter:before { content: '\f099'; } /* '' */
+.ui-facebook:before { content: '\f09a'; } /* '' */
+.ui-github:before { content: '\f09b'; } /* '' */
+.ui-rss:before { content: '\f09e'; } /* '' */
+.ui-pinterest:before { content: '\f0d2'; } /* '' */
+.ui-google:before { content: '\f0d5'; } /* '' */
+.ui-linkedin:before { content: '\f0e1'; } /* '' */
+.ui-arrow-down:before { content: '\f123'; } /* '' */
+.ui-arrow-left:before { content: '\f124'; } /* '' */
+.ui-arrow-up:before { content: '\f126'; } /* '' */
+.ui-youtube:before { content: '\f167'; } /* '' */
+.ui-xing:before { content: '\f168'; } /* '' */
+.ui-dropbox:before { content: '\f16b'; } /* '' */
+.ui-stackoverflow:before { content: '\f16c'; } /* '' */
+.ui-instagram:before { content: '\f16d'; } /* '' */
+.ui-flickr:before { content: '\f16e'; } /* '' */
+.ui-bitbucket:before { content: '\f171'; } /* '' */
+.ui-tumblr:before { content: '\f173'; } /* '' */
+.ui-apple:before { content: '\f179'; } /* '' */
+.ui-windows:before { content: '\f17a'; } /* '' */
+.ui-android:before { content: '\f17b'; } /* '' */
+.ui-dribbble:before { content: '\f17d'; } /* '' */
+.ui-skype:before { content: '\f17e'; } /* '' */
+.ui-foursquare:before { content: '\f180'; } /* '' */
+.ui-trello:before { content: '\f181'; } /* '' */
+.ui-vkontakte:before { content: '\f189'; } /* '' */
+.ui-vimeo:before { content: '\f194'; } /* '' */
+.ui-slack:before { content: '\f198'; } /* '' */
+.ui-reddit:before { content: '\f1a1'; } /* '' */
+.ui-stumbleupon:before { content: '\f1a4'; } /* '' */
+.ui-delicious:before { content: '\f1a5'; } /* '' */
+.ui-digg:before { content: '\f1a6'; } /* '' */
+.ui-behance:before { content: '\f1b4'; } /* '' */
+.ui-spotify:before { content: '\f1bc'; } /* '' */
+.ui-soundcloud:before { content: '\f1be'; } /* '' */
+.ui-codeopen:before { content: '\f1cb'; } /* '' */
+.ui-git:before { content: '\f1d3'; } /* '' */
+.ui-slideshare:before { content: '\f1e7'; } /* '' */
+.ui-twitch:before { content: '\f1e8'; } /* '' */
+.ui-lastfm:before { content: '\f202'; } /* '' */
+.ui-forumbee:before { content: '\f211'; } /* '' */
+.ui-sellsy:before { content: '\f213'; } /* '' */
+.ui-shirtsinbulk:before { content: '\f214'; } /* '' */
+.ui-skyatlas:before { content: '\f216'; } /* '' */
+.ui-whatsapp:before { content: '\f232'; } /* '' */
+.ui-snapchat:before { content: '\f2ac'; } /* '' */
+.ui-close:before { content: '\f2d7'; } /* '' */
+.ui-check:before { content: '\f383'; } /* '' */
+
+
+
+/*
+    Icon Font orion-font generated from orioniconlibrary.com
+  */
+
+  @font-face {
+  font-family: "orion-font";
+  src: url("../fonts/orion-font.eot");
+  src: url("../fonts/orion-font-.eot#iefix") format("embedded-opentype"),
+       url("../fonts/orion-font.woff2") format("woff2"),
+       url("../fonts/orion-font.woff") format("woff"),
+       url("../fonts/orion-font.ttf") format("truetype"),
+       url("../fonts/orion-font.svg#orion-font") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "orion-font";
+    src: url("../fonts/orion-font.svg#orion-font") format("svg");
+  }
+}
+
+  [data-icon]::before { content: attr(data-icon); }
+
+  [data-icon]::before,
+  .o-address-book-1::before,
+.o-arrow-target-1::before,
+.o-audio-call-1::before,
+.o-bill-1::before,
+.o-binocular-1::before,
+.o-bookmark-1::before,
+.o-business-report-1::before,
+.o-businessman-1::before,
+.o-calculator-1::before,
+.o-calls-1::before,
+.o-camera-phone-1::before,
+.o-camera-shutter-1::before,
+.o-certificate-1::before,
+.o-checkbox-confirm-circle-1::before,
+.o-checkmark-1::before,
+.o-close-1::before,
+.o-cogwheel-1::before,
+.o-config-1::before,
+.o-contact-1::before,
+.o-currency-1::before,
+.o-customer-support-1::before,
+.o-data-content-1::before,
+.o-delete-circle-1::before,
+.o-diamond-1::before,
+.o-diploma-1::before,
+.o-doctor-1::before,
+.o-dollar-bill-1::before,
+.o-edit-document-1::before,
+.o-edit-folder-1::before,
+.o-eye-1::before,
+.o-file-manager-1::before,
+.o-goal-1::before,
+.o-handshake-1::before,
+.o-health-1::before,
+.o-lady-1::before,
+.o-lightning-bolt-1::before,
+.o-man-1::before,
+.o-medical-record-1::before,
+.o-minus-circle-1::before,
+.o-money-1::before,
+.o-music-volume-eq-1::before,
+.o-numbers-1::before,
+.o-paper-plane-1::before,
+.o-pay-by-card-1::before,
+.o-people-1::before,
+.o-percentage-1::before,
+.o-pin-1::before,
+.o-pin-2::before,
+.o-pos-terminal-1::before,
+.o-price-calculator-1::before,
+.o-quit-1::before,
+.o-rating-1::before,
+.o-read-email-1::before,
+.o-read-receipt-email-1::before,
+.o-recurring-appointment-1::before,
+.o-refresh-database-1::before,
+.o-reload-1::before,
+.o-ribbon-1::before,
+.o-rocket-1::before,
+.o-sales-performance-up-1::before,
+.o-sales-up-1::before,
+.o-search-magnify-1::before,
+.o-share-1::before,
+.o-shared-files-1::before,
+.o-smartphone-1::before,
+.o-social-1::before,
+.o-special-price-1::before,
+.o-speedometer-1::before,
+.o-statistic-1::before,
+.o-strategy-1::before,
+.o-stream-video-1::before,
+.o-support-1::before,
+.o-synced-book-1::before,
+.o-synchronize-1::before,
+.o-syncing-document-1::before,
+.o-telephone-operator-1::before,
+.o-timer-1::before,
+.o-woman-1::before {
+    display: inline-block;
+  font-family: "orion-font";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  }
+
+  .o-address-book-1::before { content: "\f25d"; }
+.o-arrow-target-1::before { content: "\f25e"; }
+.o-audio-call-1::before { content: "\f25f"; }
+.o-bill-1::before { content: "\f260"; }
+.o-binocular-1::before { content: "\f261"; }
+.o-bookmark-1::before { content: "\f262"; }
+.o-business-report-1::before { content: "\f263"; }
+.o-businessman-1::before { content: "\f264"; }
+.o-calculator-1::before { content: "\f265"; }
+.o-calls-1::before { content: "\f25a"; }
+.o-camera-phone-1::before { content: "\f266"; }
+.o-camera-shutter-1::before { content: "\f267"; }
+.o-certificate-1::before { content: "\f268"; }
+.o-checkbox-confirm-circle-1::before { content: "\f269"; }
+.o-checkmark-1::before { content: "\f26a"; }
+.o-close-1::before { content: "\f26b"; }
+.o-cogwheel-1::before { content: "\f26c"; }
+.o-config-1::before { content: "\f26d"; }
+.o-contact-1::before { content: "\f26e"; }
+.o-currency-1::before { content: "\f26f"; }
+.o-customer-support-1::before { content: "\f270"; }
+.o-data-content-1::before { content: "\f271"; }
+.o-delete-circle-1::before { content: "\f272"; }
+.o-diamond-1::before { content: "\f273"; }
+.o-diploma-1::before { content: "\f274"; }
+.o-doctor-1::before { content: "\f275"; }
+.o-dollar-bill-1::before { content: "\f276"; }
+.o-edit-document-1::before { content: "\f277"; }
+.o-edit-folder-1::before { content: "\f278"; }
+.o-eye-1::before { content: "\f279"; }
+.o-file-manager-1::before { content: "\f27a"; }
+.o-goal-1::before { content: "\f27b"; }
+.o-handshake-1::before { content: "\f27c"; }
+.o-health-1::before { content: "\f27d"; }
+.o-lady-1::before { content: "\f27e"; }
+.o-lightning-bolt-1::before { content: "\f27f"; }
+.o-man-1::before { content: "\f280"; }
+.o-medical-record-1::before { content: "\f281"; }
+.o-minus-circle-1::before { content: "\f282"; }
+.o-money-1::before { content: "\f283"; }
+.o-music-volume-eq-1::before { content: "\f284"; }
+.o-numbers-1::before { content: "\f285"; }
+.o-paper-plane-1::before { content: "\f286"; }
+.o-pay-by-card-1::before { content: "\f287"; }
+.o-people-1::before { content: "\f288"; }
+.o-percentage-1::before { content: "\f289"; }
+.o-pin-1::before { content: "\f25c"; }
+.o-pin-2::before { content: "\f28a"; }
+.o-pos-terminal-1::before { content: "\f28b"; }
+.o-price-calculator-1::before { content: "\f28c"; }
+.o-quit-1::before { content: "\f28d"; }
+.o-rating-1::before { content: "\f28e"; }
+.o-read-email-1::before { content: "\f28f"; }
+.o-read-receipt-email-1::before { content: "\f290"; }
+.o-recurring-appointment-1::before { content: "\f291"; }
+.o-refresh-database-1::before { content: "\f292"; }
+.o-reload-1::before { content: "\f293"; }
+.o-ribbon-1::before { content: "\f294"; }
+.o-rocket-1::before { content: "\f295"; }
+.o-sales-performance-up-1::before { content: "\f296"; }
+.o-sales-up-1::before { content: "\f297"; }
+.o-search-magnify-1::before { content: "\f298"; }
+.o-share-1::before { content: "\f299"; }
+.o-shared-files-1::before { content: "\f29a"; }
+.o-smartphone-1::before { content: "\f29b"; }
+.o-social-1::before { content: "\f29c"; }
+.o-special-price-1::before { content: "\f29d"; }
+.o-speedometer-1::before { content: "\f29e"; }
+.o-statistic-1::before { content: "\f29f"; }
+.o-strategy-1::before { content: "\f2a0"; }
+.o-stream-video-1::before { content: "\f2a1"; }
+.o-support-1::before { content: "\f2a2"; }
+.o-synced-book-1::before { content: "\f2a3"; }
+.o-synchronize-1::before { content: "\f2a4"; }
+.o-syncing-document-1::before { content: "\f2a5"; }
+.o-telephone-operator-1::before { content: "\f2a6"; }
+.o-timer-1::before { content: "\f2a7"; }
+.o-woman-1::before { content: "\f2a8"; }

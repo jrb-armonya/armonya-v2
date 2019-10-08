@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Casumi | Blog Masonry</title>
+
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+  
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700%7CBarlow:400,400i,600,700' rel='stylesheet'>
+
+  <!-- Css -->
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/font-icons.css" />
+  <link rel="stylesheet" href="css/cookieconsent.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="apple-touch-icon" href="https://deothemes.com/envato/casumi/html/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+
+</head>
+
+<body>
+
+  <!-- Preloader -->
+  <div class="loader-mask">
+    <div class="loader">
+      "Loading..."
+    </div>
+  </div>
+
+  <main class="main-wrapper">
+
+    <!-- Navigation -->
+    <header class="nav nav--transparent">
+      <div class="nav__holder nav--sticky">
+        <div class="container-fluid container-semi-fluid nav__container">
+          <div class="flex-parent">
+
+            <!-- Search form -->
+            <form role="search" method="get" class="nav__search-form">
+              <input type="search" class="nav__search-input" id="nav__search-input" placeholder="Type &amp; Hit Enter">
+              <i class="ui-close nav__search-close" id="nav__search-close"></i>
+            </form>
+
+            <div class="nav__header">
+              <!-- Logo -->
+              <a href="index.html" class="logo-container">
+                <img class="logo logo--light" src="img/logo-light.png" srcset="img/logo-light.png 1x, img/logo-light@2x.png 2x" alt="logo">
+                <img class="logo logo--dark" src="img/logo.png" srcset="img/logo.png 1x, img/logo@2x.png 2x" alt="logo">
+              </a>
+
+              <!-- Mobile toggle -->
+              <button type="button" class="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="nav__icon-toggle-bar"></span>
+                <span class="nav__icon-toggle-bar"></span>
+                <span class="nav__icon-toggle-bar"></span>
+              </button> 
+            </div>                      
+
+            <!-- Navbar -->
+            <nav id="navbar-collapse" class="nav__wrap collapse navbar-collapse nav--align-right">
+              <ul class="nav__menu">
+                <li class="nav__dropdown active">
+                  <a href="index.html" aria-haspopup="true">Home</a>
+                  <i class="ui-arrow-down nav__dropdown-trigger" role="button" aria-haspopup="true" aria-expanded="false"></i>
+                  <ul class="nav__dropdown-menu">
+                    <li><a href="index.html">Home 1</a></li>
+                    <li><a href="index-2.html">Home 2</a></li>
+                  </ul>
+                </li>
+                <li class="nav__dropdown">
+                  <a href="blog-masonry.html#" aria-haspopup="true">Pages</a>
+                  <i class="ui-arrow-down nav__dropdown-trigger" role="button" aria-haspopup="true" aria-expanded="false"></i>
+                  <ul class="nav__dropdown-menu">
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="https://deothemes.com/envato/casumi/html/contact.html">Contact</a></li>
+                    <li><a href="404.html">404</a></li>
+                  </ul>
+                </li>
+                <li class="nav__dropdown">
+                  <a href="blog.html" aria-haspopup="true">Features</a>
+                  <i class="ui-arrow-down nav__dropdown-trigger" role="button" aria-haspopup="true" aria-expanded="false"></i>
+                  <ul class="nav__dropdown-menu">
+                    <li><a href="icons.html">Icons</a></li>
+                    <li><a href="elements.html">Elements</a></li>
+                  </ul>
+                </li>
+                <li class="nav__dropdown">
+                  <a href="blog.html" aria-haspopup="true">Blog</a>
+                  <i class="ui-arrow-down nav__dropdown-trigger" role="button" aria-haspopup="true" aria-expanded="false"></i>
+                  <ul class="nav__dropdown-menu">
+                    <li><a href="blog.html">Blog Standard</a></li>
+                    <li><a href="blog-masonry.html">Blog Masonry</a></li>
+                    <li class="nav__dropdown">
+                      <a href="single-post-1.html" aria-haspopup="true">Single Post</a>
+                      <i class="ui-arrow-down nav__dropdown-trigger" role="button" aria-haspopup="true" aria-expanded="false"></i>
+                      <ul class="nav__dropdown-menu">
+                        <li><a href="single-post-1.html">Fullwidth</a></li>
+                        <li><a href="single-post-2.html">With Sidebar</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="blog-masonry.html#">Purchase</a>
+                </li>
+              </ul> <!-- end menu -->
+
+              <!-- Mobile Phone -->
+              <div class="nav__phone-mobile d-lg-none">
+                <a href="tel:1-800-995-3959" class="nav__phone-number">1-800-995-3959</a>
+              </div>
+              
+
+              <!-- Mobile Search -->
+              <div class="nav__search-mobile d-lg-none">
+                <form role="search" method="get" class="search-form relative">
+                  <input type="search" class="search-input" placeholder="Search" />
+                  <button type="submit" class="search-button" aria-label="search button"><i class="ui-search search-icon"></i></button>
+                </form>
+              </div>
+
+            </nav> <!-- end nav-wrap -->            
+
+
+            <!-- Nav Right -->
+            <div class="nav__right d-none d-lg-flex">
+              <div class="nav__right-item">
+                <a href="tel:1-800-995-3959" class="nav__phone-number">1-800-995-3959</a>
+              </div>
+
+              <!-- Search -->
+              <div class="nav__right-item nav__search">
+                <a href="blog-masonry.html#" class="nav__search-trigger" id="nav__search-trigger">
+                  <i class="ui-search"></i>
+                </a>               
+              </div> 
+
+            </div> <!-- end nav right -->
+        
+          </div> <!-- end flex-parent -->
+        </div> <!-- end container -->
+
+      </div>
+    </header> <!-- end navigation -->
+
+    <div class="content-wrapper oh">
+
+      <!-- Page Title -->
+      <section class="page-title bg-img bg-overlay" style="background-image: url('img/page_title/blog.jpg')">
+        <div class="container">
+          <div class="page-title__holder">
+            <h1 class="page-title__title">Blog Masonry</h1>
+            <p class="subtitle">News and inspiration</p>
+          </div>
+        </div>
+      </section> <!-- end page title -->
+
+      <!-- Blog -->
+      <section class="section-wrap bottom-divider">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-lg-12 blog__content mb-34">
+              <div class="row">
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_1.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Finance</a>
+												<a href="single-post-1.html" class="entry__category-item">Management</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">Business Mistakes to Avoid When Starting a Business</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_2.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Taxes</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">Utilize these nine resources to help you take the stress out of preparing your taxes</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_3.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Productivity</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">Investment Update, Successful people ask better questions</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_4.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Finance</a>
+												<a href="single-post-1.html" class="entry__category-item">Management</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">Leadership Qualities and Confidence Make Money</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_5.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Taxes</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">Money Market Rates Finding the Best Accounts in last year 2019</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_6.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Productivity</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">8 Steps to Making Daily Progress in Your Business</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_7.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Finance</a>
+												<a href="single-post-1.html" class="entry__category-item">Management</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">Your strategy doesn’t resemble a “strategy” at all</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_8.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Taxes</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">You don’t stand out from the List of the Most Profitable Investment Projects</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+								<div class="col-lg-4">
+									<article class="entry entry-card">
+										<div class="entry__header">
+											<a href="single-post-1.html">
+												<img src="img/blog/masonry/blog_post_9.jpg" class="entry__img" alt="">
+											</a>
+											<div class="entry__category">
+												<a href="single-post-1.html" class="entry__category-item">Productivity</a>
+											</div>
+										</div>
+										<div class="entry__body">                    
+											<h4 class="entry__title">
+												<a href="single-post-1.html">What Can The Gig Economy Do For Your Company?</a>
+											</h4>
+											<div class="entry__meta">
+												<span class="entry__meta-item entry__meta-author">
+													<a href="blog-masonry.html#" class="entry__meta-author-url">
+														<img src="img/blog/author.png" class="entry__meta-author-img" alt="">
+														<span class="entry__meta-author-name">Alexander Samokhin</span>
+													</a>
+												</span>
+												<span class="entry__meta-item entry__meta-date">July 06, 2019</span>
+											</div>
+											<div class="entry__excerpt">
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie blandit lobortis. Curabitur feugiat laoreet
+												odio. Quisque ligulas ipsum, euismod atras.</p>
+											</div>
+										</div>
+									</article>
+								</div>
+
+							</div>
+
+							<!-- Pagination -->
+							<nav class="pagination text-center clearfix">
+								<span aria-current="page" class="page-numbers current">1</span>
+								<a href="blog-masonry.html#" class="page-numbers">2</a>
+								<a href="blog-masonry.html#" class="page-numbers">3</a>
+								<a href="blog-masonry.html#" class="page-numbers">4</a>
+								<a href="blog-masonry.html#" class="next page-numbers"><i class="ui-arrow-right"></i></a>
+							</nav>
+						</div>
+
+          </div>
+        </div>
+      </section> <!-- end blog -->
+
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer__widgets">
+            <div class="row">
+
+              <div class="col-lg-3 col-md-6">
+                <div class="widget widget-about-us">
+                  <!-- Logo -->
+                  <a href="index.html" class="logo-container flex-child">
+                    <img class="logo" src="img/logo.png" srcset="img/logo.png 1x, img/logo@2x.png 2x" alt="logo">
+                  </a>
+                  <div class="socials mt-32">
+                    <a href="blog-masonry.html#" class="social social-twitter" aria-label="twitter" title="twitter" target="_blank"><i class="ui-twitter"></i></a>
+                    <a href="blog-masonry.html#" class="social social-facebook" aria-label="facebook" title="facebook" target="_blank"><i class="ui-facebook"></i></a>
+                    <a href="blog-masonry.html#" class="social social-google-plus" aria-label="google plus" title="google plus" target="_blank"><i class="ui-google"></i></a>
+                  </div>
+                </div>
+              </div> <!-- end about us -->
+
+
+              <div class="col-lg-3 offset-lg-3 col-md-6">
+                <div class="widget widget_nav_menu">
+                  <h5 class="widget-title">Solutions</h5>
+                  <ul>
+                    <li><a href="blog-masonry.html#">Finance Strategy</a></li>
+                    <li><a href="blog-masonry.html#">Advertising</a></li>
+                    <li><a href="blog-masonry.html#">SMM</a></li>
+                    <li><a href="blog-masonry.html#">SEO</a></li>
+                    <li><a href="blog-masonry.html#">Google AdWords</a></li>
+                  </ul>
+                </div>
+              </div>
+
+
+              <div class="col-lg-3 col-md-6">
+                <div class="widget widget-address">
+                  <h5 class="widget-title">Company</h5>
+                  <ul>
+                    <li><address>8910 University Center Lane Suite 620 San Diego, CA 92102</address></li>
+                    <li>
+                      <span>Phone: </span>
+                      <a href="tel:+1-800-1554-456-123">+ 1 (800) 155 4561</a>
+                    </li>
+                    <li>
+                      <span>Email: </span>
+                      <a href="mailto:hi@margin.com">hi@margin.com</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>           
+
+            </div>
+          </div>    
+        </div> <!-- end container -->
+
+        <div class="footer__bottom">
+          <div class="container">
+            <div class="row">              
+              <div class="col-lg-6">
+                <div class="widget widget_nav_menu">
+                  <ul>
+                    <li><a href="blog-masonry.html#">About</a></li>
+                    <li><a href="blog-masonry.html#">Services</a></li>
+                    <li><a href="blog-masonry.html#">Pricing</a></li>
+                    <li><a href="blog-masonry.html#">Blog</a></li>
+                    <li><a href="blog-masonry.html#">Contact</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-6 text-right text-md-center">
+                <span class="copyright">
+                  &copy; 2019 Casumi, Made by <a href="../../../index.html">DeoThemes</a>
+                </span>
+              </div>
+            </div>            
+          </div>
+        </div> <!-- end footer bottom -->
+      </footer> <!-- end footer -->
+
+      <div id="back-to-top">
+        <a href="blog-masonry.html#top"><i class="ui-arrow-up"></i></a>
+      </div>
+
+    </div> <!-- end content wrapper -->
+  </main> <!-- end main wrapper -->
+  
+
+  <!-- jQuery Scripts -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/scripts.js"></script>
+
+  <!-- Cookies -->
+  <script src="js/plugins/cookieconsent.min.js"></script>
+  <script src="js/cookies.js"></script>
+    
+</body>
+</html>

@@ -56,8 +56,8 @@ class CheckTypeDataTable extends Controller{
         
         // Toutes les fiches (fiches.toutes)
         if($this->params['type'] ==  "Toutes les fiches") {
-            $recordsTotal = Fiche::count();
-            $data = Fiche::where('created_at', '!=', null);
+            $recordsTotal = Fiche::where('status_id', '!=', 29)->count();
+            $data = Fiche::where('created_at', '!=', null)->where('status_id', '!=', 29);
         }
         
         // if get fiches by status
@@ -137,7 +137,7 @@ class CheckTypeDataTable extends Controller{
         
         $recordsFiltered = $recordsTotal;
         
-         $this->datatable  = [
+        $this->datatable  = [
             'data' => $data,
             'recordsTotal' => $recordsTotal,
             'recordsFiltered' => $recordsFiltered
@@ -202,7 +202,7 @@ class CheckTypeDataTable extends Controller{
     protected function getTheOffset(){
         $this->datatable['data'] = $this->datatable['data']->offset($this->params['start'])
             ->limit($this->params['limit'])
-            ->orderBy($this->params['order'],$this->params['dir'])
+            ->orderBy($this->params['order'], $this->params['dir'])
             ->with('status');
     }
 

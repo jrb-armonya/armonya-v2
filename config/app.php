@@ -181,14 +181,11 @@ return [
         
         //Export PDF
         Barryvdh\DomPDF\ServiceProvider::class,
-
         App\Services\Factures\FacturesServiceProvider::class,
         App\Services\DateBlocker\DateBlockerServiceProvider::class,
         App\Services\Predictif\PredictifServiceProvider::class,
-
         App\Services\Security\SecurityServiceProvider::class,
-        
-
+        App\Services\Groups\GroupsServiceProvider::class,
 
     ],
 

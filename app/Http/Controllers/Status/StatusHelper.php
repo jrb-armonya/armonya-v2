@@ -87,12 +87,13 @@ class StatusHelper extends Controller
         }
 
         // Check if the user is from Report (new update)
+        // TODO: VERIFIER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if( Auth::user()->role_id == 7 ) {
             $data['repo_id'] = Auth::user()->id;
             $data['d_repo'] = \Carbon\Carbon::now();
         }
 
-
+    
 
 
         //Entre dans A Reporter
@@ -124,6 +125,7 @@ class StatusHelper extends Controller
             $action->action = "Confirmée";
         }
 
+        // A Envoyer
         if( $new == 6 ) {
             $action->action = "A Envoyer";
         }
@@ -136,7 +138,7 @@ class StatusHelper extends Controller
             $action->action = "Partenaire";
         }
 
-        // Entre dans Attente CR (fiche envoyé)
+        // Entre dans Controle Qualité
         if( $new == 8 ) {
             $action->action = "CQ";
         }
@@ -153,7 +155,7 @@ class StatusHelper extends Controller
             $action->action = "Litige";
         }
 
-        // Sort des non valides
+        // Entre dans A Retravailler
         if( $new == 2 ){
             $action->action = "A Retravailler";
         }
@@ -244,7 +246,6 @@ class StatusHelper extends Controller
 
         //si noValid
         else if( in_array($id, \Config('status.noValid'))){
-            dd("YOUSSEF DEBUG");
             $allowed = Satus::whereIn([1, 2, 3 , 4 , 5, 6, 7, 8])->get();
         }
         return $allowed->merge($noValid);

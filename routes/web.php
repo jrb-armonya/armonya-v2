@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth', 'ipCheck']], function () {
 
         Route::get('/week-production', 'RapportsController@weekProduction');
 
+
         Route::group(['prefix' => 'rapports'], function () {
             Route::resource('/', 'RapportsController');
             //Get the rapports of the given role
@@ -108,6 +109,10 @@ Route::group(['middleware' => ['auth', 'ipCheck']], function () {
             Route::get('user/details/report/{id}/{type}/{month}', 'Users\RapportUsersController@getDetailsOf');
 
             Route::get('user/{user}/{role}/{month}/{year}', 'Users\RapportUsersController@getUserRapport');
+
+            //Route jPlus
+        Route::post('/plus','RapportJplusController@searchByDate')->name('calculJPlus');
+        Route::get('/jplus', 'RapportJplusController@index')->name('indexj');
         });
     });
 
@@ -193,4 +198,6 @@ Route::get('/best-ta', function () {
         echo $agent->name . ' => ' . $agent->fiches()->count() . '<br>';
     }
     echo '### DONE ###';
+
+
 });

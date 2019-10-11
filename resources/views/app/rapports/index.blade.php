@@ -77,4 +77,23 @@
             </a>
         </div>
         @endif
+        <div class="row">
+            <a href="/rapports/jplus" style="width:100%;">
+                <div class="col-xl-12 col-sm-12">
+                    <div class='card card-rapports-roles mb-4' style="background-color: #766df9;">
+                        <div class="card-body">
+                            <div class="media d-flex align-items-center">
+                                <div class="mr-4 rounded-circle sr-icon-box text-white">
+                                    <i class="ti-pie-chart"></i>
+                                </div>
+                                <div class="media-body text-light">
+                                    <h4 class="text-uppercase mb-0 weight500">Moyenne J +</h4>
+                                    <span> - </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
 @endsection

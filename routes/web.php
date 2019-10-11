@@ -202,4 +202,5 @@ Route::get('/best-ta', function () {
 Route::get('/github-hook', function(){
     echo "WEBHOOK";
     echo "TEST 2";
+    echo "TEST 3";
 });

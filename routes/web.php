@@ -197,3 +197,8 @@ Route::get('/best-ta', function () {
     }
     echo '### DONE ###';
 });
+
+
+Route::get('/github-hook', function(){
+    echo "WEBHOOK";
+});

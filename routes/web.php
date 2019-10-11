@@ -8,7 +8,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// ipCheck add it when we go in prod mode
 Route::group(['middleware' => ['auth']], function () {
     // dashboard
     Route::get('/dashboard', 'DashboardController@index');

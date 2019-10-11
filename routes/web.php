@@ -7,7 +7,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+// In production mode (origin/master) add ipCheck middleware
 Route::group(['middleware' => ['auth']], function () {
     // dashboard
     Route::get('/dashboard', 'DashboardController@index');

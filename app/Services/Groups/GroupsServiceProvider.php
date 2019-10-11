@@ -16,7 +16,7 @@ class GroupsServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        // laod Routes
+        // load Routes
         $this->loadRoutesFrom(__DIR__ .'/Http/routes.php');
         
         // load Views

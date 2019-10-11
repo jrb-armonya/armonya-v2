@@ -2,13 +2,15 @@
 
 namespace App;
 
+use Auth;
+use App\Role;
+use App\Fiche;
+use App\Services\Groups\Models\Group;
 use Illuminate\Notifications\Notifiable;
+use App\Services\Groups\Models\GroupRole;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Fiche;
-use App\Role;
-use Auth;
 
 class User extends Authenticatable
 {
@@ -49,6 +51,28 @@ class User extends Authenticatable
 
     public function roleName() {
         return $this->role->name;
+    }
+    //Group relations 
+    public function groupRole()
+    {
+        return $this->hasMany(GroupRole::class);
+    }
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class)->withPivot(['role_id']);
+    }
+    public function inGroup($groupId)
+    {
+        foreach($this->groups()->get() as $group)
+        {
+            if($group->id == $groupId)
+            {
+                return true ;
+            }
+        }
+
+        return false;
+       
     }
 
     //Mes Fiches

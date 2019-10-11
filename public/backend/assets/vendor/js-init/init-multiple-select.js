@@ -1,12 +1,14 @@
 // multiple select init
 
+
 $(function(){
     $('#my_multi_select1').multiSelect();
+
     $('#my_multi_select2').multiSelect({
         selectableOptgroup: true
     });
 
-    $('#permissions-pages, #permissions-status, #permissions-custom').multiSelect({
+    $('#permissions-pages, #permissions-status, #permissions-custom, #group-pages').multiSelect({
         selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
         selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
         afterInit: function (ms) {
@@ -41,9 +43,6 @@ $(function(){
             this.qs2.cache();
         }
     });
-
-
-
 
 });
 

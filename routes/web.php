@@ -75,6 +75,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Fiches for post-conf
         Route::get('/post-conf/confirmed', 'DisplayFichesController@postConfConfirmed');
+
+        // Delete Fiche Rappel
+        Route::post('/delete/rappel', 'DeleteFicheRappel@delete');
     });
     //Rapports
     Route::group(['namespace' => 'Rapports'], function () {

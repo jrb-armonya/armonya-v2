@@ -78,7 +78,7 @@ class Fiche extends Model
         return $this->retour;
     }
 
-
+    
     public static function thisMonthAgent($month)
     {
         return self::whereMonth('created_at', $month)->whereYear('created_at', date('Y'))
@@ -102,7 +102,25 @@ class Fiche extends Model
             })
             ->get();
     }
+    
+    public function jPlus($d = null, $m = null, $y = null)
+    {
 
+        if ($y == null && $m == null && $d == null) {
+            $fiches = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'));
+        } else {
+            if ($y != null) {
+                $fiches  = Fiche::whereYear('created_at', $y);
+            }
+            if ($m != null) {
+                $fiches  = Fiche::whereMonth('created_at', $m);
+            }
+            if ($d != null) {
+                $fiches  = Fiche::whereDay('created_at', $d);
+            }
+        }
+        return $fiches->get();
+    }
 
     /**
      *  function for the Rapports

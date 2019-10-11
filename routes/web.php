@@ -8,7 +8,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth', 'ipCheck']], function () {
+// ipCheck add it when we go in prod mode
+Route::group(['middleware' => ['auth']], function () {
     // dashboard
     Route::get('/dashboard', 'DashboardController@index');
     // POST DATATABLE
@@ -75,6 +76,9 @@ Route::group(['middleware' => ['auth', 'ipCheck']], function () {
 
         // Fiches for post-conf
         Route::get('/post-conf/confirmed', 'DisplayFichesController@postConfConfirmed');
+
+        // Delete Fiche Rappel
+        Route::post('/delete/rappel', 'DeleteFicheRappel@delete');
     });
     //Rapports
     Route::group(['namespace' => 'Rapports'], function () {

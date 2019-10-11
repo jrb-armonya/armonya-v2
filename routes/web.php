@@ -8,7 +8,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'ipCheck']], function () {
     // dashboard
     Route::get('/dashboard', 'DashboardController@index');
     // POST DATATABLE

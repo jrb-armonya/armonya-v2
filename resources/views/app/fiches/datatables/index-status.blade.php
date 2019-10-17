@@ -95,6 +95,9 @@
     <script src="{{ asset('/backend/app/fiches/populate-modal.js') }}"></script>
     <script src="{{ asset('/backend/app/fiches/add-email-partenaire.js') }}"></script>
     <script src="{{ asset('/backend/app/fiches/email-annulation.js') }}"></script>
+    
+    {{-- <script src="{{ asset('/backend/app/fiches/report-annulation.js') }}"></script> --}}
+
 
 
 

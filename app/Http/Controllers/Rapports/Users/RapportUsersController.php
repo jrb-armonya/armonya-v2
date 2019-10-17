@@ -29,25 +29,41 @@ class RapportUsersController extends Controller{
         }
     }
 
-    public function getDetailsOf($id, $type, $month = null){
+    public function getDetailsOf($id, $type, $month = null, $year = null){
+
         $user = User::find($id);
+
         if($type == "trait"){
-            $fiches = $user->reportedMonth($month)->get();
+            $fiches = $user->reports()
+                ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
+                ->pluck('fiche_id');
         }
         if($type == "pris"){
-            $fiches = $user->reportedMonth($month)
-                ->whereIn('status_id', [4, 5, 6, 7, 8, 10])->get();
+            $fiches = $user->reports()
+            ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
+            ->whereHas('fiche', function($q){
+                $q->whereNotIn('status_id', \Config::get('status.noValid'));
+            })->pluck('fiche_id');
         }
+
         if($type == "conf"){
-            $fiches = $user->reportedMonth($month)
-            ->where('d_confirm', '>=', DB::raw('d_repo'))->get();
+            // $f = new Fiche();
+            $fiches = $user->reports()
+            ->whereIn('state', [1,2])
+            ->whereMonth('updated_at', session()->has('month') ? session('month') : $month)
+            ->whereYear('updated_at', session()->has('year') ? session('year') : $year)->pluck('fiche_id');
+            // $fiches = $user->reportedMonth($month)
+            // ->where('d_confirm', '>=', DB::raw('d_repo'))->pluck('fiche_id');
         }
         if($type == "env"){
-            $fiches = $user->reportedMonth($month)
-                ->where('d_confirm', '>=', DB::raw('d_repo'))
-                ->where('d_env', '>=', DB::raw('d_repo'))
-                ->whereIn('status_id', [7, 8, 10])->get();
+            // $f = new Fiche();
+            $fiches = $user->reports()
+                ->where('state', 2)
+                ->whereMonth('updated_at', session()->has('month') ? session('month') : $month)
+                ->whereYear('updated_at', session()->has('year') ? session('year') : $year)->pluck('fiche_id');
         }
+
+        $fiches = Fiche::whereIn('id', $fiches)->get();
 
         View::share('text', 'Rapport Envoyées ' . $user->name);
         View::share('title', 'Rapport');

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Fiches;
 
 use Auth;
+use App\User;
 use App\Fiche;
 use App\Action;
 use App\Status;
 use App\Export\Export;
+use App\ReportManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Fiches\HistoricFiche;
@@ -66,7 +68,7 @@ class FichesController extends Controller
 
         //update an existing Fiche
         else {
-
+            // dd($request->all());
             $fiche = Fiche::find($request->id);
             $oldFiche = $fiche;
             $old_status = $fiche->status_id;
@@ -98,7 +100,19 @@ class FichesController extends Controller
                 }
             }
 
+            // Annulation du repot (ne compte plus pour l'utilisateur qui la fait)
+            if($request->report_annulation == "on"){
+                // $data['d_repo'] = $fiche->d_repo;
+                // dd($fiche->d_repo);
+                // $data['d_repo'] =  null;
+                ReportManager::where('user_id', $fiche->repo_id)->where('fiche_id', $fiche->id)->delete();
+                $data['data']['repo_id'] = null;
+                $data['data']['d_repo'] = null;
+                // $data['repo_id'] = null;
+            }
+
             $fiche->open = false;
+            // dd($data['data']);
             $fiche->update($data['data']);
 
             HistoricFiche::saveInit($fiche, $data['action']);
@@ -149,5 +163,11 @@ class FichesController extends Controller
         if (Fiche::find($request->id)->partenaire_id != null) {
             return "true";
         } else return "false";
+    }
+
+    // Get reported By
+    public function getReportedBy(Request $request)
+    {
+        return User::where('id', Fiche::find($request->id)->repo_id)->withTrashed()->first();
     }
 }

@@ -27,7 +27,7 @@ $(document).ready(function () {
                 $('body').addClass('loading');
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 populateModal(data);
                 $('body').removeClass('loading');
             }

@@ -10,6 +10,7 @@ use App\Export\Export;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Fiches\HistoricFiche;
+use App\Http\Controllers\Archive\ArchiveController;
 use App\Http\Controllers\Fiches\FicheHelper as FicheHelper;
 use App\Http\Controllers\Status\StatusHelper as StatusHelper;
 use App\Http\Controllers\Rapports\RapportsController as Rapports;
@@ -40,8 +41,7 @@ class FichesController extends Controller
      */
     public function store(Request $request)
     {
-
-
+       
         $user = $request->user();
         $data = $request->all();
         $date_rendez_vous = FicheHelper::getDateHeure($request->date_rendez_vous);
@@ -73,6 +73,15 @@ class FichesController extends Controller
             $new_status = $data['status_id'];
 
             $data = StatusHelper::formatStatus($data, $fiche, $old_status, $new_status);
+
+            // verification si ARchive exite dans request
+            // if existe => ArchiveController
+            if($request->archive){
+                $controller = new ArchiveController();
+                $parts = $request->partenaires;
+                $controller->putCibles($data,$parts);
+            }
+
 
             // Envoi d'un email d'annulation à l'ancien partenaire.
             // Si et seulement si le nouveau status est Attente CR

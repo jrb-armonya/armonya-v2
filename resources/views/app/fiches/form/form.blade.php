@@ -25,7 +25,11 @@
         
     </div>
     <div class="row">
+
         @include('app.fiches.form.submit')
+        @if(isset($status->id) && $status->id == 10)
+        @include('app.fiches.form.archiver')
+        @endif
     </div>
         
 </form> 

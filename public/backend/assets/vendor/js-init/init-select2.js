@@ -18,6 +18,10 @@ $(function(){
     $("#facture_emails_cc").select2({
         placeholder: "CC..."
     });
+
+    $("#partenaire_action").select2({
+        placeholder: "Partenaire..."
+    });
     // nested
     // $('#option_s2').select2({
     //     placeholder: "Select a state"

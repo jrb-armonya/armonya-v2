@@ -147,6 +147,7 @@ Route::group(['middleware' => ['auth', 'ipCheck']], function () {
     Route::get('/actions/last', 'Actions\ActionsController@last');
     // Archive 'non-valide'
     Route::get('/archive/non-valides', 'Fiches\DisplayFichesController@noValid');
+    Route::post('/archive/cibles', 'Archive\ArchiveController@putCibles')->name('putCibles');
     //Search
     Route::post('/search', 'Search\SearchController@get');
     // clear-caches

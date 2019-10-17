@@ -217,3 +217,6 @@ Route::get('/best-ta', function () {
 Route::post('/github-sync', function(){
     exec('git pull');
 });
+
+
+Route::get('/test-repo', 'TestController@repoTest');

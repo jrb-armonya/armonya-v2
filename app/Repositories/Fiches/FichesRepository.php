@@ -1,67 +1,79 @@
 <?php 
+
 namespace App\Repositories\Fiches;
 
 use App\Fiche;
+use App\Repositories\BaseRepository;
 
-class FichesRepository{
+/**
+ * FicheRepository
+ * @extends BaseRepository
+ * @package Repository
+ */
+class FichesRepository extends BaseRepository{
 
-    protected $modal;
-
-    public function __construct(Fiche $modal) {
-        $this->modal = $modal;
+    public function __construct()
+    {
+	   parent::__construct(new Fiche);
+	   $this->query = $this->model->query();
     }
 
-    public function createdThisMonth() {
-        return $this->modal->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'));
-    }
-    public function createdThisMonthByAgent() {
-        return $this->createdThisMonth()
-            ->whereHas('user', function ($query) {
-                $query->where('role_id', '=', 2);
-        })->get();
-    }
-    public function createdThisMonthByOthers() {
-        return $this->createdThisMonth()
-            ->whereHas('user', function ($query) {
-                $query->where('role_id', '!=', 2);
-        })->get();
-    }
+	/**
+	 * Created Fiche
+	 *
+	 * @param int $day
+	 * @param int $month
+	 * @param int $year
+	 * @param boolean $excludeRappel
+	 * @param boolean $agent
+	 * @return QueryBuilder
+	 */
+    public function created($day = null, $month = null, $year = null, $excludeRappel = true, $agent = true)
+    {
+		if($day){
+			$this->query->whereDay('created_at', $day);
+		}
 
-    public static function createdToday() {
-        return self::createdThisMonth()->whereDay('created_at', date('d'));
-    }
-    public function createdTodayByAgent() {
-        return $this->createdToday()
-            ->whereHas('user', function ($query) {
-                $query->where('role_id', '=', 2);
-        })->get();
-    }
-    public function createdTodayByOthers() {
-        return $this->createdToday()
-            ->whereHas('user', function ($query) {
-                $query->where('role_id', '!=', 2);
-        })->get();
-    }
+		if($month){
+			$this->query->whereMonth('created_at',$month);
+		}
 
-    public function createdMonth($month, $year) {
-        return $this->modal->whereMonth('created_at', $month)->whereYear('created_at', $year)->get();
-    }
-    
+		if($year){
+			$this->query->whereYear('created_at', $year);
+		}
 
-    public function ecouterMonth($month) {}
-    public function ecouterDay(){}
-    
-    public function confirmerMonth($month) {}
-    public function confirmerDay(){}
-    
-    public function reporterMonth($month) {}
-    public function reporterDay(){}
+		// exclude the rappel status
+		if($excludeRappel){
+			$this->excludeRappel();
+		}
 
-    public function envoyerMonth($month) {}
-    public function envoyerDay(){}
+		if($agent){
+			$this->getOnlyAgent();
+		}
 
-    public function ciblerMonth($month) {}
-    public function ciblerDay(){}
+		return $this->query;
+	}
 
+	/**
+	 * exclude fiche rappel
+	 *
+	 * @return void
+	 */
+	private function excludeRappel() 
+	{
+		$this->query->whereNotIn('status_id', [29]);
+	}
+
+	/**
+	 * Get only fiches by agent
+	 *
+	 * @return void
+	 */
+	private function getOnlyAgent()
+	{
+		$this->query->whereHas('user', function($q){
+			$q->where('role_id', 2);
+		});
+	}
     
 }

@@ -147,6 +147,7 @@ class FichesController extends Controller
 
     /**
      * Ajax call to get a fiche from fiches.index
+     * 
      */
     public function getFiche(Request $request)
     {

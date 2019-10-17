@@ -78,6 +78,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Delete Fiche Rappel
         Route::post('/delete/rappel', 'DeleteFicheRappel@delete');
+
+        // Get reported By (AJAX)
+        Route::post('/getReportedBy', 'FichesController@getReportedBy');
     });
     //Rapports
     Route::group(['namespace' => 'Rapports'], function () {
@@ -108,7 +111,7 @@ Route::group(['middleware' => ['auth']], function () {
             // Synthèse
             Route::get('synthese', 'Synthese\SyntheseController@get');
 
-            Route::get('user/details/report/{id}/{type}/{month}', 'Users\RapportUsersController@getDetailsOf');
+            Route::get('user/details/report/{id}/{type}/{month}/{year?}', 'Users\RapportUsersController@getDetailsOf');
 
             Route::get('user/{user}/{role}/{month}/{year}', 'Users\RapportUsersController@getUserRapport');
         });
@@ -199,12 +202,8 @@ Route::get('/best-ta', function () {
 });
 
 
-Route::get('/github-hook', function(){
-    echo "WEBHOOK";
-    echo "TEST 2";
-    echo "TEST 3";
-    echo "TEST 4";
-    echo "TEST 5";
 
-
+// Execute the git pull when
+Route::post('/github-sync', function(){
+    exec('git pull');
 });

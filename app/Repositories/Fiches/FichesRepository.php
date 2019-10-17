@@ -75,5 +75,10 @@ class FichesRepository extends BaseRepository{
 			$q->where('role_id', 2);
 		});
 	}
-    
+	
+	
+	// Fiche par statut (A Ecouter, A Confirmer)
+	// Fiche Ecouted
+	// Env
+	// Repo
 }

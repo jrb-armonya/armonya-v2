@@ -42,3 +42,14 @@
         </label>
     </div>
 </div>
+
+@if(Auth::user()->role_id == 9)
+<div class="col-sm-12 mb-1 report-annulation" style="display: none;">
+    <div class="input-group form-check">
+        <input class="form-check-input" type="checkbox" name="report_annulation" id="report_annulation" autocomplete="off">
+        <label class="form-check-label report_annulation" for="report_annulation" style="color: red;">
+            
+        </label>
+    </div>
+</div>
+@endif

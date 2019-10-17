@@ -75,6 +75,17 @@ class User extends Authenticatable
        
     }
 
+    /**
+     * Report Relation (from the extra table)
+     * User can have multiple Reports
+     *
+     * @return void
+     */
+    public function reports()
+    {
+        return $this->hasMany(ReportManager::class);
+    }
+
     //Mes Fiches
     public function fiches() {
         return $this->hasMany('App\Fiche')->where('status_id', '!=', $this->rappel_id);
@@ -158,5 +169,10 @@ class User extends Authenticatable
         $f = new Fiche();
         return $f->reportedMonth($month)->where('repo_id', $this->id);
     }
+
+    // public function reportedLastMonth(int $month = null) {
+    //     $f = new Fiche();
+    //     return $f->reportedMonth($month-1)->whereMonth('d_confirm', '=', $month)->where('repo_id', $this->id);
+    // }
 
 }

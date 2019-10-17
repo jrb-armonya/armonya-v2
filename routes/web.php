@@ -8,7 +8,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth', 'ipCheck']], function () {
+// In production mode (origin/master) add ipCheck middleware
+Route::group(['middleware' => ['auth']], function () {
+
     // dashboard
     Route::get('/dashboard', 'DashboardController@index');
     // POST DATATABLE
@@ -78,6 +80,9 @@ Route::group(['middleware' => ['auth', 'ipCheck']], function () {
 
         // Delete Fiche Rappel
         Route::post('/delete/rappel', 'DeleteFicheRappel@delete');
+
+        // Get reported By (AJAX)
+        Route::post('/getReportedBy', 'FichesController@getReportedBy');
     });
     //Rapports
     Route::group(['namespace' => 'Rapports'], function () {
@@ -109,7 +114,7 @@ Route::group(['middleware' => ['auth', 'ipCheck']], function () {
             // Synthèse
             Route::get('synthese', 'Synthese\SyntheseController@get');
 
-            Route::get('user/details/report/{id}/{type}/{month}', 'Users\RapportUsersController@getDetailsOf');
+            Route::get('user/details/report/{id}/{type}/{month}/{year?}', 'Users\RapportUsersController@getDetailsOf');
 
             Route::get('user/{user}/{role}/{month}/{year}', 'Users\RapportUsersController@getUserRapport');
 
@@ -204,4 +209,11 @@ Route::get('/best-ta', function () {
     echo '### DONE ###';
 
 
+});
+
+
+
+// Execute the git pull when
+Route::post('/github-sync', function(){
+    exec('git pull');
 });

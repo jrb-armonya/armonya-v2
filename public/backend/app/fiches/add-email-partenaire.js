@@ -3,10 +3,12 @@ var selectEmail = $("#partenaire_emails");
 var selectEmailCC = $("#partenaire_emails_cc");
 
 $("._status").change(function() {
-    selectEmail.append("<option value=''>---------------</option>")
+
     
     // if status == Attente CR
-    if( this.value == 7) {
+    if( this.value == 7 ) {
+        
+        selectEmail.append("<option value=''>---------------</option>")
 
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         

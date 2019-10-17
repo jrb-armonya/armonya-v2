@@ -5,6 +5,7 @@ use Auth;
 use App\Action;
 use App\Status;
 use Carbon\Carbon;
+use App\ReportManager;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Report\ReportHelper as ReportHelper;
@@ -86,6 +87,14 @@ class StatusHelper extends Controller
             $action->action = "Retour A Ecouter";
         }
 
+
+        // $old === 3
+        // $new != $old
+        // $new != 0
+        // TRAITE
+
+
+
         // Check if the user is from Report (new update)
         // TODO: VERIFIER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if( Auth::user()->role_id == 7 ) {
@@ -99,18 +108,24 @@ class StatusHelper extends Controller
         //Entre dans A Reporter
         if( $new == 3 ) {
             $action->action = "Fiche reportée";
+            // $data['d_repo'] = null;
+            // $data['repo_id'] = null;
             $data = ReportHelper::setDateHeureRappel($data);
         }
 
         //Sort de A Repporter
+        // TODO: A verifier si sort de 3 et entre dans 3 
         if( $old == 3 && $old != $new && $new != 0) {
 
             $data['repo_id'] = Auth::user()->id;
             $data['d_repo'] = \Carbon\Carbon::now();
+            // Create new Report with ReportManager
+            ReportHelper::newReport($data['id']);
             // $data['d_rappel'] = $data['h_rappel'] =  null;
+            // A Corriger
             $data = ReportHelper::setDateHeureRappel($data);
             $action->action = "Report";
-            $action->new_status = $old;
+            $action->new_status = $new;
         }
 
         // Entre dans A Confirmer
@@ -122,6 +137,11 @@ class StatusHelper extends Controller
         if( $new == 5 ) {
             $data['conf_id'] = Auth::user()->id;
             $data['d_confirm'] = \Carbon\Carbon::now();
+            if($fiche->repo_id){
+                ReportManager::where('user_id', $fiche->repo_id)->where('fiche_id', $fiche->id)->update([
+                    'state' => 1
+                ]);
+            }
             $action->action = "Confirmée";
         }
 
@@ -135,6 +155,11 @@ class StatusHelper extends Controller
             // PartenaireHelper::checkIfFicheHasOldPartenaire();
             $data['env_id'] = Auth::user()->id;
             $data['d_env'] = \Carbon\Carbon::now();
+            if($fiche->repo_id){
+                ReportManager::where('user_id', $fiche->repo_id)->where('fiche_id', $fiche->id)->update([
+                    'state' => 2
+                ]);
+            }
             $action->action = "Partenaire";
         }
 

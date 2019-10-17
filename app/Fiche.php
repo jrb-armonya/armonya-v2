@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\ReportManager;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,6 +44,7 @@ class Fiche extends Model
 
 
 
+
     public function status()
     {
         return $this->belongsTo('App\Status');
@@ -78,7 +80,12 @@ class Fiche extends Model
         return $this->retour;
     }
 
-    
+
+    public function reports()
+    {
+        return $this->hasMany(ReportManager::class);
+    }
+
     public static function thisMonthAgent($month)
     {
         return self::whereMonth('created_at', $month)->whereYear('created_at', date('Y'))
@@ -157,6 +164,7 @@ class Fiche extends Model
 
         return $fiches;
     }
+
     public function createdMonth($month)
     {
         return Fiche::whereMonth('created_at', $month)->whereYear('created_at', date('Y'));

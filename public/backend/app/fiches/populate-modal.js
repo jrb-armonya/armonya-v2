@@ -1,3 +1,26 @@
+function getReportUser(id){
+    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        /* the route pointing to the post function */
+        url: hostIdentifier() + '/fiches/getReportedBy',
+        type: 'POST',
+        data: {
+            _token: CSRF_TOKEN,
+            id: id
+        },
+        dataType: 'JSON',
+        beforeSend: function () {
+            // $('body').addClass('loading');
+        },
+        success: function (data) {
+            // return data.name;
+            $('.report-annulation').css('display', 'block');
+            $('.report_annulation').empty();
+            $('.report_annulation').append('Annuler le Report de ' + data.name + '?');
+        }
+    });
+}
+
 function populateModal(data) {
     $('#genre-select select option[value="' + data.genre + '"]').prop('selected', true);
     $('#id').val(data.id)
@@ -124,5 +147,9 @@ function populateModal(data) {
 
     $('#fiche-name').append(data.id + ' - ' + data.name + ' ' + data.prenom + ' - Le ' + newDate + ' à ' + data.h_rv)
 
-
+    //if fiche has report_id
+    if(data.repo_id != null) {
+        getReportUser(data.id);
+        // console.log(reportedUser);
+    }
 }

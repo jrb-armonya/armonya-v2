@@ -1,4 +1,4 @@
-var select = $("#partenaire");
+var selectPartenaire = $("#partenaire");
 var selectEmail = $("#partenaire_emails");
 var selectEmailCC = $("#partenaire_emails_cc");
 
@@ -9,8 +9,9 @@ $("._status").change(function() {
     if( this.value == 7 ) {
         
         selectEmail.append("<option value=''>---------------</option>")
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        
         // get all partenaires and append them to the select
         $.ajax({
             url: hostIdentifier() + '/configuration/partenaires',
@@ -18,9 +19,9 @@ $("._status").change(function() {
             data: {_token: CSRF_TOKEN},
             dataType: 'JSON',
             success: function(data) {
-                select.empty();
+                selectPartenaire.empty();
                 for(i=0; i<data.length; i++) {
-                    select.append("<option value='" + data[i].id + "'>"+ data[i].name +"</option>")
+                    selectPartenaire.append("<option value='" + data[i].id + "'>"+ data[i].name +"</option>")
                 }
             }
         })
@@ -61,7 +62,7 @@ $("._status").change(function() {
         
     }
     else {
-        select.empty();
+        selectPartenaire.empty();
         selectEmail.empty();
         $('#partenaire_box').hide();
         $("#partenaire_email_box").hide();

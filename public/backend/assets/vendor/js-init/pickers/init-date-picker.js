@@ -23,9 +23,9 @@ $(function(){
 
 
 
-    $('.date-picker-input').datepicker({
+    $('.date-picker-input, #jp-date').datepicker({
         language: 'fr',
-        format: 'mm-dd-yyyy',
+        format: 'dd-mm-yyyy',
         autoclose: true,
         orientation: "bottom",
         templates: {

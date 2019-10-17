@@ -7,8 +7,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 // In production mode (origin/master) add ipCheck middleware
 Route::group(['middleware' => ['auth']], function () {
+
     // dashboard
     Route::get('/dashboard', 'DashboardController@index');
     // POST DATATABLE
@@ -101,6 +103,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/week-production', 'RapportsController@weekProduction');
 
+
         Route::group(['prefix' => 'rapports'], function () {
             Route::resource('/', 'RapportsController');
             //Get the rapports of the given role
@@ -114,6 +117,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('user/details/report/{id}/{type}/{month}/{year?}', 'Users\RapportUsersController@getDetailsOf');
 
             Route::get('user/{user}/{role}/{month}/{year}', 'Users\RapportUsersController@getUserRapport');
+
+            //Route jPlus
+        Route::post('/plus','RapportJplusController@searchByDate')->name('calculJPlus');
+        Route::get('/jplus', 'RapportJplusController@index')->name('indexj');
         });
     });
 
@@ -145,6 +152,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/actions/last', 'Actions\ActionsController@last');
     // Archive 'non-valide'
     Route::get('/archive/non-valides', 'Fiches\DisplayFichesController@noValid');
+    Route::post('/archive/cibles', 'Archive\ArchiveController@putCibles')->name('putCibles');
     //Search
     Route::post('/search', 'Search\SearchController@get');
     // clear-caches
@@ -199,6 +207,8 @@ Route::get('/best-ta', function () {
         echo $agent->name . ' => ' . $agent->fiches()->count() . '<br>';
     }
     echo '### DONE ###';
+
+
 });
 
 

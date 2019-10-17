@@ -9,11 +9,13 @@ class TestController extends Controller
 {
     protected $fiche;
 
-    public function __construct(FichesRepository $fiche) {
+    public function __construct(FichesRepository $fiche)
+    {
         $this->fiche = $fiche;
     }
 
-    public function fichesCreatedByAgent(){
-        return $this->fiche->createdMonth('01', '2019');
+    public function repoTest()
+    {
+        dd($this->fiche->created(null, 10, 2019, true, null)->get());
     }
 }

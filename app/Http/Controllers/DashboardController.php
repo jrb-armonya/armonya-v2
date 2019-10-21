@@ -7,7 +7,6 @@ use App\Role;
 use App\Fiche;
 use App\Status;
 use App\Widget;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Dashboard\CheckRole;
 
 
@@ -23,13 +22,6 @@ class DashboardController extends Controller
         $status = Status::where('isActive', 1)->get();
         $title = "Dashboard";
         $roles = Role::all();
-        // $fichesByAgentsMonth = null;
-        // if(Auth::user()->role_id == 6)
-        // {
-        //     $fichesByAgentsMonth = Fiche::whereMonth('created_at', date('m') )->whereYear('created_at', date('Y'));
-        //     $fichesByAgentsDay = Fiche::whereMonth('created_at', date('m') )->whereYear('created_at', date('Y'))->whereDay('created_at', date('d'));
-        // }
-
         $fiches = $this->checkRole();
         return view('app.index', compact('widgets', 'title', 'status', 'roles', 'month', 'fiches'));
     }

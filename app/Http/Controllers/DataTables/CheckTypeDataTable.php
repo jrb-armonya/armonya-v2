@@ -67,8 +67,8 @@ class CheckTypeDataTable extends Controller{
         }
 
         if($this->params['type'] == "Créer ce mois") {
-            $recordsTotal = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->count();
-            $data = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'));
+            $recordsTotal = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->where('status_id', '!=', 29)->count();
+            $data = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->where('status_id', '!=', 29);
         }
 
         if($this->params['type'] == "done_status") {

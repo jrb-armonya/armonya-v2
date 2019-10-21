@@ -27,8 +27,9 @@
     <div class="row">
 
         @include('app.fiches.form.submit')
+        {{-- Bouton Archiver --}}
         @if(isset($status->id) && $status->id == 10)
-        @include('app.fiches.form.archiver')
+            @include('app.fiches.form.archiver')
         @endif
     </div>
         

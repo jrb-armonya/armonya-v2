@@ -4248,3 +4248,9 @@ blockquote {
 	min-width: 0;
 	word-break: break-word;
 	overflow-wrap: break-word; }
+
+
+.select2, .select2-container{
+	border: 1px solid darkgray !important;
+	border-radius: 5px !important;
+}

@@ -6,8 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseRepository
 {
+    /**
+     * A Model instance
+     *
+     * @var Model
+     */
     protected $model;
 
+    /**
+     * Inject the Model in the BaseRepository
+     *
+     * @param Model $model
+     */
     public function __construct(Model $model)
     {
         $this->model = $model;
@@ -74,4 +84,5 @@ class BaseRepository
     {
         return $this->query->getBy($attr, $value)->delete();
     }
+
 }

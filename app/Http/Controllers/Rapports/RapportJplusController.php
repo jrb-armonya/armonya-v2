@@ -58,6 +58,6 @@ class RapportJplusController extends Controller
 			$totalDiff += $f->created_at->diff($f->d_rv)->days;
 		}
 
-		return $totalDiff / max(1, $fiches->count());
+		return round($totalDiff / max(1, $fiches->count()), 2);
 	}
 }

@@ -1,7 +1,5 @@
 <?php
 
-use App\Services\Predictif\Models\Phone;
-
 Route::get('/', function () {
     return view('site.html.index');
 });
@@ -13,6 +11,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // dashboard
     Route::get('/dashboard', 'DashboardController@index');
+
     // POST DATATABLE
     Route::post('get-data-my-datatables', ['as' => 'get.data', 'uses' => 'DataTables\DataTablesController@getData']);
     //Configuration
@@ -29,9 +28,11 @@ Route::group(['middleware' => ['auth']], function () {
         //roles
         Route::group(['prefix' => "roles"], function () {
             Route::get('/', 'RolesController@index');
+            Route::post('/', 'RolesController@roles');
             Route::post('store', 'RolesController@store');
             Route::get('edit/{id}', 'RolesController@edit');
             Route::post('update', 'RolesController@update');
+            //get roles
         });
 
         //permissions
@@ -40,18 +41,25 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('delete', 'PermissionsController@delete')->name('permission.delete');
         });
 
-        //Partenaires
+
+        /**
+         * Group Partenaires
+         */
         Route::resource('/partenaires', 'PartenaireController');
-        Route::post('/partenaires/getEmails', 'PartenaireController@getEmails');
-        Route::post('/partenaires/add-email', 'PartenaireController@addEmail')->name('partenaires.add-email');
+        //partenaires
+        Route::group(['prefix' => 'partenaires'], function(){
+            //Partenaires
+            Route::post('/getEmails', 'PartenaireController@getEmails');
+            Route::post('/add-email', 'PartenaireController@addEmail')->name('partenaires.add-email');
+            Route::post('/getPartenaire', 'PartenaireController@getPartenaire');
+            Route::post('/delete', 'PartenaireController@deletePartenaire');
+            // Route::post('/create-espace-partenaire', 'CreateEspacePartenaire@create');
 
-        Route::post('/partenaires/getPartenaire', 'PartenaireController@getPartenaire');
-        Route::post('/partenaires/delete', 'PartenaireController@deletePartenaire');
-        Route::post('/partenaires/create-espace-partenaire', 'CreateEspacePartenaire@create');
+        });
 
-        //get roles
-        Route::post('/roles', 'RolesController@roles');
+        
     });
+
     // Fiches
     Route::group(['prefix' => 'fiches', 'namespace' => 'Fiches'], function () {
 
@@ -84,6 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Get reported By (AJAX)
         Route::post('/getReportedBy', 'FichesController@getReportedBy');
     });
+
     //Rapports
     Route::group(['namespace' => 'Rapports'], function () {
         //MyRapports
@@ -136,25 +145,41 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/is-doublons/{fiche}/{doublon}', 'DoublonsController@isDoublons');
     });
 
-    // *** Route for espace-partenaire prefix=> 'espace-partenaire' ***
-
     // View PDF
     Route::get('/pdf/{id}', '\App\Export\Export@viewPdf');
+
     // Status Resource
     Route::resource('status', 'Status\StatusController');
-    // Historique
-    Route::get('/historique/fiche/{id}', 'Historique\HistoriqueController@fiche');
-    // Historique details
-    Route::get('/historique/details/{id}', 'Fiches\HistoricFiche@getDetails');
-    // Historique details first
-    Route::get('/historique/details/first/{fiche_id}', 'Fiches\HistoricFiche@getFirstDetails');
+
+    /**
+     * Group Historique
+     */
+    Route::group(['prefix' => 'historique'], function(){
+        // Historique
+        Route::get('fiche/{id}', 'Historique\HistoriqueController@fiche');
+        Route::group(['prefix' => 'details'], function(){
+            // Historique details
+            Route::get('{id}', 'Fiches\HistoricFiche@getDetails');
+            // Historique details first
+            Route::get('first/{fiche_id}', 'Fiches\HistoricFiche@getFirstDetails');
+        });
+    });
+
     // get the last actions (ajax call) 
     Route::get('/actions/last', 'Actions\ActionsController@last');
-    // Archive 'non-valide'
-    Route::get('/archive/non-valides', 'Fiches\DisplayFichesController@noValid');
-    Route::post('/archive/cibles', 'Archive\ArchiveController@putCibles')->name('putCibles');
+
+    /**
+     * Group Archive
+     */
+    Route::group(['prefix' => 'archive'], function(){
+        // Archive 'non-valide'
+        Route::post('cibles', 'Archive\ArchiveController@putCibles')->name('putCibles');
+        Route::get('non-valides', 'Fiches\DisplayFichesController@noValid');
+
+    });
     //Search
     Route::post('/search', 'Search\SearchController@get');
+
     // clear-caches
     Route::get('/clear-cache', function () {
         Artisan::call('cache:clear');
@@ -199,7 +224,6 @@ Route::get('/deleted-today', function () {
     return 'NICE';
 });
 
-
 Route::get('/best-ta', function () {
     echo '### Processing... ### <br>';
     $agents = App\User::where('role_id', 2)->get();
@@ -210,13 +234,5 @@ Route::get('/best-ta', function () {
 
 
 });
-
-
-
-// Execute the git pull when
-Route::post('/github-sync', function(){
-    exec('git pull');
-});
-
 
 Route::get('/test-repo', 'TestController@repoTest');

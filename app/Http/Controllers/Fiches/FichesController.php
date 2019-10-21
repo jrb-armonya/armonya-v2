@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Fiches;
 
+use App\Http\Controllers\Report\ReportHelper;
 use Auth;
 use App\User;
 use App\Fiche;
@@ -56,6 +57,12 @@ class FichesController extends Controller
 
             $fiche = $createdFiche['fiche'];
             $data = $createdFiche['data'];
+
+            if(Auth::user()->role_id == 7)
+            {
+                // Create new Report with ReportManager
+                ReportHelper::newReport($fiche->id);
+            }
 
             $action = new Action();
             $action->fiche_id = $fiche->id;

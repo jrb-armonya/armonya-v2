@@ -34,7 +34,8 @@
 </div>
 
 
-<div class="col-sm-12 mb-1 email-annulation" style="display: none;">
+
+<div class="col-sm-6 mb-1 email-annulation mt-5" style="display: none;">
     <div class="input-group form-check">
         <input class="form-check-input" type="checkbox" name="email_annulation" id="email_annulation" autocomplete="off">
         <label class="form-check-label" for="email_annulation" style="color: red;">
@@ -43,8 +44,9 @@
     </div>
 </div>
 
+{{-- Annulation report --}}
 @if(Auth::user()->role_id == 9)
-<div class="col-sm-12 mb-1 report-annulation" style="display: none;">
+<div class="col-sm-6 mb-1 report-annulation mt-5" style="display: none;">
     <div class="input-group form-check">
         <input class="form-check-input" type="checkbox" name="report_annulation" id="report_annulation" autocomplete="off">
         <label class="form-check-label report_annulation" for="report_annulation" style="color: red;">

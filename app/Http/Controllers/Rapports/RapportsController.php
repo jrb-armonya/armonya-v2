@@ -33,7 +33,12 @@ class RapportsController extends Controller {
         $month = date('m');
         $year = date('Y');
         $role = Role::where('name', ucwords($role))->first();
-        $users = User::where('role_id', $role->id)->get();
+        if($role->name == "Report"){
+            $users = User::whereIn('role_id', [15, 7])->get();
+        }
+        else{
+            $users = User::where('role_id', $role->id)->get();
+        }
         $status = Status::all();
         return view('app.rapports.' . strtolower($role->name) . '.index', compact('role', 'users', 'status', 'month', 'year'));
     }

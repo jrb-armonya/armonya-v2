@@ -52,7 +52,6 @@
 </head>
 
 <body class="left-sidebar-fixed left-sidebar-dark header-fixed header-primary-color " id="app">
-<?php //var_dump(url()->current()); ?>
     @include('app.dashboard.parts.header')
     @include('app.dashboard.parts.search')
      
@@ -91,7 +90,7 @@
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/sparkline/jquery.sparkline.js') }}"></script>
 <!--sparkline initialization-->
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/js-init/sparkline/init-sparkline.js') }}"></script>
-@if(Auth::user()->role_id == 1)
+@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 7)
 <script type="text/javascript" src="{{ asset('backend/app/right-sidebar.js') }}"></script>
 @endif
 

@@ -46,10 +46,10 @@
                         <tbody>
                             @foreach($users as $user)
                             @php
-                                // $trait = $user->reportedMonth(session()->has('month') ? session('month') : $month)->count();
-                                $trait = $user->reports()
-                                    ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
-                                    ->count();
+                                $trait = $user->reportedMonth(session()->has('month') ? session('month') : $month)->count();
+                                // $trait = $user->reports()
+                                //     ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
+                                //     ->count();
 
                                 /* $brut = $user->reportedMonth(session()->has('month') ? session('month') : $month)
                                     ->whereNotIn('status_id', Config::get('status.noValid'))->whereNotIn('status_id', [3])->count();

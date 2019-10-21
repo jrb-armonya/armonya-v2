@@ -23,6 +23,7 @@ class CreateFiche extends Controller
             $data['d_repo'] = Carbon::today();
             // get the report
             $data['repo_id'] = $user->id;
+
         }
         // else created by other (agent)
         else {

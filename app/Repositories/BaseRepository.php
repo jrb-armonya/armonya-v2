@@ -22,60 +22,67 @@ class BaseRepository
     {
         $this->model = $model;
     }
+
     /**
-     * All models
+     * Get by date and attribut has default value created_at
      *
-     * @return Collection
+     * @param int $day
+     * @param int $month
+     * @param int $year
+     * @param string $attr
+     * @return void
      */
+    public function byDate($day=null, $month=null, $year=null, $attr='created_at')
+    {
+        
+        $this->query->whereNotNull($attr);
+
+		if($day){
+			$this->query->whereDay($attr, $day);
+		}
+
+		if($month){
+			$this->query->whereMonth($attr,$month);
+		}
+
+		if($year){
+			$this->query->whereYear($attr, $year);
+		}
+		return $this;
+    }
+
+    public function execute()
+    {
+        return $this->query->get();
+    }
+
+    // all
     public function all()
     {
-        return $this->model->all();
+        $this->query->where('created_at', '!=', null);
+        return $this;
+    }
+    // getBy
+    public function getBy($attr ,$value)
+    {
+        $this->query->where($attr,$value);
+        return $this;
     }
 
-    /**
-     * Get a model by a given attribute.
-     *
-     * @param String $attribute
-     * @param mixed $value
-     * @return Collection
-     */
-    public function get(string $attribute, $value)
+    // create
+    public function create($data)
     {
-        return $this->model->where($attribute, $value);
+        return $this->query->create($data);
     }
-
-    /**
-     * Create a new Model
-     *
-     * @param Array $data
-     * @return Model
-     */
-    public function create(Array $data)
+    // update
+    public function update($attr, $value, $data)
     {
-        return $this->model->create($data);
+        return $this->query->getBy($attr ,$value)->update($data);
     }
-
-    /**
-     * Update a Model
-     *
-     * @param int $id
-     * @param mixed $data
-     * @return boolean
-     */
-    public function update(int $id, mixed $data)
+    // delete
+    public function delete($attr, $value)
     {
-        return $this->model->find($id)->update($data);
-    }
-
-    /**
-     * Delete a model by its id.
-     *
-     * @param int $id
-     * @return boolean
-     */
-    public function delete(int $id)
-    {
-        return $this->model->delete($id);
+        return $this->query->getBy($attr, $value)->delete();
     }
 
 }

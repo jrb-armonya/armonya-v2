@@ -24,5 +24,9 @@ class Action extends Model
     public function fiche() {
         return $this->belongsTo('App\Fiche');
     }
+
+    public function partenaire(){
+        return $this->belongsTo('App\Partenaire');
+    }
   
 }

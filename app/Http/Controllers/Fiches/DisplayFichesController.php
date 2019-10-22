@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fiches;
 
 use App\Fiche;
+use App\Action;
 use App\Status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,7 +58,17 @@ class DisplayFichesController extends Controller
         $title = 'Archive';
         return view('app.fiches.datatables.index-all-fiches', compact('text', 'title'));
     }
+    
 
+    public function cibles()
+    {
+        $text = 'Archive Ciblée';
+        $title = 'Archive';
+        return view('app.fiches.datatables.index-all-fiches', compact('text', 'title'));
+    }
+
+    
+     
     public function createdMonth()
     {
         $text = 'Créer ce mois';

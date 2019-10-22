@@ -81,7 +81,7 @@ class DataTablesController extends Controller
          * Status: Attente CR.
          * Exemple: we need the partenaire_id for the order.
          */
-        if ($request->status_id == 7) {
+        if ($request->status_id == 7 || $request->status_id == 10) {
             $this->columns = [
                 0 => 'id',
                 1 => 'name',

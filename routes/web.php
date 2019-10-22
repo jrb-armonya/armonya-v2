@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
         /**
          * Group Partenaires
          */
+        Route::post('/getOldPartenaires', 'PartenaireController@getOldPartenaires');
         Route::resource('/partenaires', 'PartenaireController');
         //partenaires
         Route::group(['prefix' => 'partenaires'], function(){
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/add-email', 'PartenaireController@addEmail')->name('partenaires.add-email');
             Route::post('/getPartenaire', 'PartenaireController@getPartenaire');
             Route::post('/delete', 'PartenaireController@deletePartenaire');
+            
             // Route::post('/create-espace-partenaire', 'CreateEspacePartenaire@create');
 
         });
@@ -175,6 +177,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Archive 'non-valide'
         Route::post('cibles', 'Archive\ArchiveController@putCibles')->name('putCibles');
         Route::get('non-valides', 'Fiches\DisplayFichesController@noValid');
+        Route::get('ciblees', 'Fiches\DisplayFichesController@cibles');
 
     });
     //Search

@@ -42,7 +42,7 @@
                         {{-- <th>Status</th> --}}
                         <th>Date Création</th>
                         <th>Agent</th>
-                        @if($status->name == "Attente CR")
+                        @if($status->name == "Attente CR" || $status->name == "Ciblée")
                             <th>Partenaire</th>
                         @endif
                         @if($status->name != "A Ecouter")
@@ -146,7 +146,7 @@
                     // {data: "status", "orderable":false},
                     {data: "created_at"},
                     {data: "user_id", "orderable":false},
-                @if($status->name == "Attente CR")
+                @if($status->name == "Attente CR" || $status->name == "Ciblée")
                     {data: "partenaire_id"},
                 @endif
                 @if($status->name != "A Ecouter")

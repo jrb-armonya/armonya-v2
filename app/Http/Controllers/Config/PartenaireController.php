@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\PartenaireRequest;
+use App\Fiche;
 
 class PartenaireController extends Controller
 {
@@ -31,7 +32,20 @@ class PartenaireController extends Controller
         }
         return view('app.partenaires.index', compact('partenaires'));
     }
+    
+    //get old partenaire for the fiche cible and archive
+    public function getOldPartenaires(Request $request)
+    {
+        $f = Fiche::find($request->id);
 
+        $partenaire_ids = $f->actions()
+            ->where('action', 'Partenaire')->pluck('partenaire_id');
+
+        $partenaires = Partenaire::whereIn('id', $partenaire_ids)->pluck('id');
+
+        return $partenaires;
+
+    }
 
     // return json partenaire
     public function getPartenaire(Request $request)
@@ -39,6 +53,8 @@ class PartenaireController extends Controller
         $partenaire = Partenaire::find($request->id);
         return $partenaire;
     }
+
+    
 
     // Delete partenaire
     public function deletePartenaire(Request $request)

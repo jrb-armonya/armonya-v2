@@ -28,6 +28,7 @@ class StatusHelper extends Controller
         $action->new_status = $new;
         $action->old_status = $old;
         
+        
         // just update the fiche (same status)
         if( $new == 0 ) {
             $data['status_id'] = $old ;
@@ -102,6 +103,7 @@ class StatusHelper extends Controller
             $data['d_repo'] = \Carbon\Carbon::now();
         }
 
+        
     
 
 
@@ -162,7 +164,7 @@ class StatusHelper extends Controller
             }
             $action->action = "Partenaire";
         }
-
+        
         // Entre dans Controle Qualité
         if( $new == 8 ) {
             $action->action = "CQ";
@@ -175,6 +177,11 @@ class StatusHelper extends Controller
             $action->action = "Cible";
         }
         
+        //Sort de Archive ciblé
+        if( $old == 10 && $fiche->is_archived == 1){
+            $fiche->is_archived = 0;
+        } 
+
         //litige
         if( $new == 9 ) {
             $action->action = "Litige";

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Fiches;
 
-use App\Http\Controllers\Report\ReportHelper;
 use Auth;
 use App\User;
 use App\Fiche;
 use App\Action;
 use App\Status;
+use App\Partenaire;
 use App\Export\Export;
 use App\ReportManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Report\ReportHelper;
 use App\Http\Controllers\Fiches\HistoricFiche;
 use App\Http\Controllers\Archive\ArchiveController;
 use App\Http\Controllers\Fiches\FicheHelper as FicheHelper;
@@ -187,4 +189,6 @@ class FichesController extends Controller
     {
         return User::where('id', Fiche::find($request->id)->repo_id)->withTrashed()->first();
     }
+
+   
 }

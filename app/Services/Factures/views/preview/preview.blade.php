@@ -44,14 +44,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($facture->fiches as $fiche)
-                                    <tr style="background-color: #b9cdce;">
-                                        <td>{{ ucfirst($fiche->name) }} {{ ucfirst($fiche->prenom) }}</td>
-                                        <td>1</td>
-                                        <td>{{$facture->partenaire->prix_fiche}}</td>
-                                        <td>-</td>
-                                    </tr>
-                                    @endforeach
+                                    {{-- Facture Détaillé --}}
+                                    @if($facture->type == 1)
+                                        @foreach($facture->fiches as $fiche)
+                                        <tr style="background-color: #b9cdce;">
+                                            <td>{{ ucfirst($fiche->name) }} {{ ucfirst($fiche->prenom) }}</td>
+                                            <td>1</td>
+                                            <td>{{$facture->partenaire->prix_fiche}}</td>
+                                            <td>-</td>
+                                        </tr>
+                                        @endforeach
+                                    {{-- Facture Groupé --}}
+                                    @else
+
+                                        <tr style="background-color: #b9cdce;">
+                                            <td>{{$facture->fiches->count()}} rendez-vous</td>
+                                            <td>{{$facture->fiches->count()}}</td>
+                                            <td>{{$facture->partenaire->prix_fiche}}</td>
+                                            <td>-</td>
+                                        </tr>
+                                    @endif
 
                                     <tr>
                                         <td>&nbsp;</td>

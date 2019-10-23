@@ -1,4 +1,11 @@
 @extends('layouts.app')
+@section('css')
+    <style>
+    input[type=radio]{
+        transform:scale(1.5);
+    }
+    </style>
+@endsection
 @section('content')
 
 <div class="row">
@@ -61,7 +68,43 @@
             <div class="row col-12">
                 @include('factures::tables.list-fiches-partenaire')
                 @include('factures::tables.list-fiches-facture')
-                <a href="{{ url( '/facturation/factures/preview', $facture->id ) }}" class="col-md-12"><button class="btn btn-success col-md-12" @if($facture->fiches->count() == 0) disabled @endif>Preview</button></a>
+
+                    <div class="col-sm-2">
+                        <div class="input-group form-check">
+                            <input class="form-check-input factType" type="radio" name="type" value="1" id="detail" autocomplete="off"
+                            @if ($facture->type == 1)
+                                checked
+                            @endif>
+                            <label class="form-check-label" for="detail">
+                                Détaillée
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="input-group form-check">
+                            <input class="form-check-input factType" type="radio" name="type" value="2" id="group" autocomplete="off"
+                            @if ($facture->type == 2)
+                                checked
+                            @endif>
+                            <label class="form-check-label" for="group">
+                                Groupée
+                            </label>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    
+                    <a href="{{ url( '/facturation/factures/preview', $facture->id) }}" class="col-md-12">
+                        <button class="btn btn-success" @if($facture->fiches->count() == 0) disabled @endif>Preview</button>
+                    </a>
+
+                
+
+                <hr>
+
+                
             </div>
         </div>
     </div>
@@ -75,4 +118,26 @@
     <script src="{{ asset('/backend/assets/vendor/data-tables/dataTables.bootstrap4.min.js') }}"></script>
     <!--init datatable-->
     <script src="{{asset('/backend/assets/vendor/js-init/init-datatable.js')}}"></script>
+    <script>
+        const  CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        const type = $('.factType');
+        const facture_id = {{$facture->id}};
+
+
+        type.on('change', function(){
+            $.ajax({
+                url: '/facturation/setType',
+                type: 'POST',
+                data: { _token: CSRF_TOKEN, id: facture_id, type: this.value },
+                dataType: 'JSON',
+                success: function(){
+                    console.log("SUCCESS TYPE")
+                }
+
+
+            })
+        })
+
+    </script>
 @endsection

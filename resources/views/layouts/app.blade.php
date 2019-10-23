@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="Mosaddek">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Jrb <jrb.youssef@gmail.com>">
 
     <!--favicon icon-->
     <link rel="shortcut icon" href="/armonya-v2.local/favicon.ico">
@@ -15,8 +16,8 @@
     <script src="{{asset('common/scripts.js')}}"></script>
 
     <!--web fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"> --}}
 
     <!--bootstrap styles-->
     <link href="{{ asset('/backend/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">

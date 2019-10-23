@@ -27,4 +27,7 @@ Route::group(['middleware' => ['web', 'auth'], 'namespace' => 'App\Services\Fact
         // Envoyer Facture à un Partenaire
         Route::post('sendFacture', 'SendFactureController@send');
 
+        // set Type of Facture
+        Route::post('setType', 'FacturesController@setType');
+
 });

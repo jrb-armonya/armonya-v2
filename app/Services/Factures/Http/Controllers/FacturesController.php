@@ -133,14 +133,20 @@ class FacturesController extends Controller {
     }
 
     /**
-     * preview
+     * preview (POST)
      *
      * @param mixed $id
      * @return void
      */
     public function preview($id) {
+
         $facture = Facture::find($id);
+
+        if(isset($request->type))
+        $facture->update(['type' => $request->type]);
+
         $partenaire = Partenaire::find($facture->partenaire_id);
+
         return view('factures::preview.preview', compact('facture','partenaire'));
     }
 
@@ -161,21 +167,37 @@ class FacturesController extends Controller {
      */
     public function generateAndDownlaodPDF($id){
 
-        $facture = Facture::find($id);
 
+        $facture = Facture::find($id);
+        
         $this->storageDir = $this->storageDir . str_replace(' ', '_', $facture->partenaire->name) . '/';
         // Create Or Edit existant PDFFile
         $PDFFile = new PDFFile();
+        
         if($facture->pdf_id != null){
             $PDFFile = $PDFFile->find($facture->pdf_id);
         }
+
         $PDFFile->path = storage_path($this->storageDir). $facture->id .'.pdf';
         $PDFFile->save();
-
         // Attach the model to the PDFFile
         $facture->pdf_id = $PDFFile->id;
         $facture->save();
         
         return $this->generatePDF($facture, $this->viewPdf, $this->storageDir);
+    }
+
+    /**
+     * Set the type of the Facture: detaillée or groupée
+     * détaillée : 1
+     * groupée: 2
+     *
+     * @param Request $request
+     * @return json
+     */
+    public function setType(Request $request)
+    {
+        Facture::find($request->id)->update(['type' => $request->type]);
+        return \response()->json(200);
     }
 }

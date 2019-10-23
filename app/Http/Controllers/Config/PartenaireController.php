@@ -60,7 +60,7 @@ class PartenaireController extends Controller
     public function deletePartenaire(Request $request)
     {
         $partenaire = Partenaire::find($request->id);
-        if($partenaire->emails->coun() != 0){
+        if($partenaire->emails->count() != 0){
             foreach($partenaire->emails as $email) {
                 $email->delete();
             }

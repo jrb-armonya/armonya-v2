@@ -11,7 +11,7 @@ class Facture extends Model {
      *
      * @var array
      */
-    protected $fillable = ['partenaire_id', 'status', 'amount', 'pdf_id'];
+    protected $fillable = ['partenaire_id', 'status', 'amount', 'pdf_id', 'type'];
 
     /**
      * $dates

@@ -64,7 +64,9 @@ class DisplayFichesController extends Controller
     {
         $text = 'Archive Ciblée';
         $title = 'Archive';
-        return view('app.fiches.datatables.index-all-fiches', compact('text', 'title'));
+        $type = 'Archive Ciblée';
+        $status = Status::find(10);
+        return view('app.fiches.datatables.index-status', compact('type','text', 'title','status'));
     }
 
     

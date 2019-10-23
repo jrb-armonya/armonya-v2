@@ -62,8 +62,15 @@ class CheckTypeDataTable extends Controller{
         
         // if get fiches by status
         if($this->params['type'] == "status") {
-            $recordsTotal = Fiche::where('status_id', $this->params['status_id'])->count();
-            $data = Fiche::where('status_id', $this->params['status_id']);
+            // if status === cible => afficher que les fiche non archiver (is_archived == 0)
+            if($this->params['status_id'] == 10) {
+                $recordsTotal = Fiche::where('status_id', $this->params['status_id'])->where('is_archived', 0)->count();
+                $data = Fiche::where('status_id', $this->params['status_id'])->where('is_archived', 0);
+            }
+            else {
+                $recordsTotal = Fiche::where('status_id', $this->params['status_id'])->count();
+                $data = Fiche::where('status_id', $this->params['status_id']);
+            }
         }
 
         if($this->params['type'] == "Créer ce mois") {
@@ -96,6 +103,11 @@ class CheckTypeDataTable extends Controller{
         if($this->params['type'] == "noValid") {
             $recordsTotal = Fiche::whereIn('status_id', \Config::get('status.noValid'))->count();
             $data = Fiche::whereIn('status_id', \Config::get('status.noValid'));
+        }
+
+        if($this->params['type'] == "Archive Ciblée") {
+            $recordsTotal = Fiche::where('status_id', 10)->where('is_archived',1)->count();
+            $data = Fiche::where('status_id', 10)->where('is_archived',1);
         }
 
         if($this->params['type'] == 'Plateau'){

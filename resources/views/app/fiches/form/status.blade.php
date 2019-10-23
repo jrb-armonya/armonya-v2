@@ -3,7 +3,7 @@
         $status = Status::statusAllowed($status->id);
     } else $status = [];
 
-    if(isset($text) && $text =="noValid"){
+    if(isset($text) && ($text =="noValid" || $text =="Archive Ciblée")){
         $status = App\Status::all();
     }
 ?>

@@ -8,7 +8,12 @@ use App\Status;
 class NestedData {
     public static function nestedData($post, $status)
     {
-        $nestedData['id'] = $post->id;
+        if($post->isCible()){
+            $nestedData['id'] = '<span style="background-color:#00E199 ; padding: 5px; border-radius: 10%; " >'.$post->id.'</span>';
+        }
+        else {
+            $nestedData['id'] = $post->id;
+        }
         $nestedData['name'] = '<b>' . $post->name . ' ' . $post->prenom . '</b>';
         if($post->isRetour()){
             $nestedData['name'] = '<b><i class="ti-help" style="color:red;"></i></b>' . $nestedData['name'];
@@ -34,7 +39,7 @@ class NestedData {
         }
         $nestedData['created_at'] = date('d/m/Y H:i', strtotime($post->created_at));
         $nestedData['user_id'] = SpanController::getUserSpan($post->user);
-        if( $status != null && $status->name ==  "Attente CR")
+        if( $status != null && $status->name ==  "Attente CR" || $status->name== "Ciblée")
         {
             if($post->partenaire == null) { $nestedData['partenaire_id'] = null; } else $nestedData['partenaire_id'] = $post->partenaire->name;
         }

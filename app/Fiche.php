@@ -58,6 +58,10 @@ class Fiche extends Model
     {
         return $this->hasMany('App\Action');
     }
+    public function isCible()
+    {
+        return $this->actions->where('action','Cible')->first();
+    }
 
     public function partenaire()
     {

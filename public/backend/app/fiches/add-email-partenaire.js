@@ -19,10 +19,26 @@ $("._status").change(function() {
             data: {_token: CSRF_TOKEN},
             dataType: 'JSON',
             success: function(data) {
-                selectPartenaire.empty();
-                for(i=0; i<data.length; i++) {
-                    selectPartenaire.append("<option value='" + data[i].id + "'>"+ data[i].name +"</option>")
-                }
+                $.ajax({
+                    url : hostIdentifier() + '/configuration/getOldPartenaires',
+                    type : 'POST',
+                    data:{_token: CSRF_TOKEN, id : fiche_id},
+                    dataType: 'JSON',
+                    success : function(oldPartenaires){
+                        console.log(oldPartenaires);
+                        console.log(data);
+                        selectPartenaire.empty();
+                        for(i=0; i<data.length; i++) {
+                            if(oldPartenaires.includes(data[i].id)){
+                                selectPartenaire.append("<option disabled value='" + data[i].id + "'>"+ data[i].name +"</option>")
+                            }
+                            else{
+                                selectPartenaire.append("<option value='" + data[i].id + "'>"+ data[i].name +"</option>")
+                            }
+                         }
+                    }
+                })
+                
             }
         })
         $('#partenaire_box').show();

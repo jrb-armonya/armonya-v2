@@ -1,26 +1,40 @@
 {{-- Rapport Synthese Index --}}
-
 @extends('layouts.app')
+
+@section('css')
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--select2-->
+<link href="{{ asset('/backend/assets/vendor/select2/css/select2.css') }}" rel="stylesheet">
+<link href="{{ asset('/backend/assets/vendor/datetime-picker/css/datetimepicker.css') }}" rel="stylesheet">
+<link href="{{ asset('/backend/assets/vendor/timepicker/css/timepicker.css') }}" rel="stylesheet">
+<link href="{{ asset('/backend/assets/vendor/date-picker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+<!--datetime & time picker-->
 @section('content')
 
-    <div class="row">
-
+        <div class="card-body">
+            <h5>Choisir une date</h5>
+        <form action="{{route('syntheseDate')}}" method="post">
+            @csrf
+                <div class="row">
+                    <input class="form-control col-12" type="text" placeholder="choisir une date" value="{{ $date->format('d-m-Y') }}" id="jp-date" name="date">
+                     <input type="submit" class="col-12 btn btn-success" value="Valider">
+                </div>
+            </form>
+        </div>
+        <div class="row">               
         <div class="col-md-6">
-
             <div class="card card-shadow mb-4">
-
                 <div class="card-header border-0">
                     <div class="custom-title-wrap bar-primary">
                         <div class="custom-title"> 
                             <h5>
-                                Synthese du {{ date('d/m/Y') }}
+                                Synthese du {{ $date->format('d/m/Y') }} 
                             </h5>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-body" style="padding-bottom: 0;">
-                    
                     {{-- Created --}}
                     <div class="row">
 
@@ -193,7 +207,7 @@
                     <div class="custom-title-wrap bar-primary">
                         <div class="custom-title"> 
                             <h5>
-                                Rendez-vous du {{ \Carbon\Carbon::tomorrow()->format('d/m/Y') }}
+                                Rendez-vous du {{ $date->addDays(1)->format('d/m/Y') }}
                             </h5>   
                         </div>
                     </div>
@@ -342,3 +356,8 @@
     </div>
 
 @endsection
+@section('javascript')
+    <script src="{{asset('/backend/assets/vendor/date-picker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{asset('/backend/assets/vendor/js-init/init-datatable.js') }}"></script>
+    <script src="{{asset('/backend/assets/vendor/js-init/pickers/init-date-picker.js') }}"></script>
+@endsection    

@@ -103,13 +103,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
-
     <script>
 
         $("#start").val($.cookie("start"));
         $("#end").val($.cookie("end"));
-
-
 
         // $("#start").val() = start_date;
         

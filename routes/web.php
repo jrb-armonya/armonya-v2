@@ -119,6 +119,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('/', 'RapportsController');
             //Get the rapports of the given role
             Route::get('role/{role}', 'RapportsController@getRapportsByRole');
+            Route::get('groups','RapportsController@getRapportsGroups');
+            Route::get('group/{id}','RapportsController@getRapportsByGroup');
             //single agent rapports
             Route::get('role/agent/{id}/{month}', 'RapportsController@getRapportEcouteUser');
             Route::post('agent/dateRange', 'RapportsController@monthSelect');

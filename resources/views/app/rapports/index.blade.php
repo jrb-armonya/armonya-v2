@@ -96,4 +96,23 @@
                 </div>
             </a>
         </div>
+        <div class="row">
+            <a href="/rapports/groups" style="width:100%;">
+                <div class="col-xl-12 col-sm-12">
+                    <div class='card card-rapports-roles mb-4' style="background-color: #910101;">
+                        <div class="card-body">
+                            <div class="media d-flex align-items-center">
+                                <div class="mr-4 rounded-circle sr-icon-box text-white">
+                                    <i class="ti-pie-chart"></i>
+                                </div>
+                                <div class="media-body text-light">
+                                    <h4 class="text-uppercase mb-0 weight500">Groups</h4>
+                                    <span> {{$groups->count()}} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
 @endsection

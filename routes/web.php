@@ -126,14 +126,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('agent/dateRange', 'RapportsController@monthSelect');
             // Synthèse
             Route::get('synthese', 'Synthese\SyntheseController@get');
-
+            Route::post('synthesDate','Synthese\SyntheseController@searchByDate')->name('syntheseDate');
             Route::get('user/details/report/{id}/{type}/{month}/{year?}', 'Users\RapportUsersController@getDetailsOf');
 
             Route::get('user/{user}/{role}/{month}/{year}', 'Users\RapportUsersController@getUserRapport');
 
             //Route jPlus
-        Route::post('/plus','RapportJplusController@searchByDate')->name('calculJPlus');
-        Route::get('/jplus', 'RapportJplusController@index')->name('indexj');
+            Route::post('/plus','RapportJplusController@searchByDate')->name('calculJPlus');
+            Route::get('/jplus', 'RapportJplusController@index')->name('indexj');
         });
     });
 

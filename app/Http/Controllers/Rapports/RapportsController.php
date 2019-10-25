@@ -13,17 +13,22 @@ use Illuminate\Support\Facades\View;
 use App\Services\Groups\Models\Group;
 use App\Http\Controllers\Rapports\RapportsWeek;
 
-class RapportsController extends Controller {
+class RapportsController extends Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         View::share('title', 'Rapports');
     }
 
-    public function index() {
+    public function index()
+    {
         $rapports = ['Agent', 'Ecoute', 'Confirmation', 'Report'];
         $roles = Role::whereIn('name', $rapports)->get();
+
         $groups = Group::All();
         return view ('app.rapports.index', compact('roles' , 'groups'));
+
     }
 
     /**
@@ -31,19 +36,21 @@ class RapportsController extends Controller {
      * @param string $role name of the given role  
      * @return view app.rapport.{nom du role}.index
      */
-    public function getRapportsByRole($role) {
+    public function getRapportsByRole($role)
+    {
         $month = date('m');
         $year = date('Y');
+        $day = date('d');
         $role = Role::where('name', ucwords($role))->first();
-        if($role->name == "Report"){
+        if ($role->name == "Report") {
             $users = User::whereIn('role_id', [15, 7])->get();
-        }
-        else{
+        } else {
             $users = User::where('role_id', $role->id)->get();
         }
         $status = Status::all();
-        return view('app.rapports.' . strtolower($role->name) . '.index', compact('role', 'users', 'status', 'month', 'year'));
+        return view('app.rapports.' . strtolower($role->name) . '.index', compact('role', 'users', 'status', 'day', 'month', 'year'));
     }
+
 
     public function getRapportsGroups()
     {
@@ -72,7 +79,8 @@ class RapportsController extends Controller {
         return $week->weekProduction();
     }
 
-    public function getRapportEcouteUser($id, $month) {
+    public function getRapportEcouteUser($id, $month)
+    {
 
         $user = User::find($id);
         $month = $month;
@@ -81,13 +89,13 @@ class RapportsController extends Controller {
         return view('app.rapports.agent.single', compact('user', 'mesFiches', 'month', 'year'));
     }
 
-    public function monthSelect(Request $request){
-        
+    public function monthSelect(Request $request)
+    {
+
         $date = \explode('/', $request->month);
         $month = $date[0];
         $year = $date[1];
 
         return redirect()->back()->with('month', $month)->with('year', $year);
     }
-    
 }

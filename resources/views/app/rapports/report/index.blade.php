@@ -1,7 +1,8 @@
 {{-- Rapport Ecoute Index --}}
 <?php 
+    // dd($day);
     $f = new App\Fiche;
-    // date rappel $month
+    // $reportMonth: c'est les fiches avec date Rappel ce mois.
     $reportMonth = $f->reportMonth(session()->has('month') ? session('month') : $month);
     $reportedMonth = $f->reportedMonth(session()->has('month') ? session('month') : $month);
 ?>
@@ -46,60 +47,70 @@
                         <tbody>
                             @foreach($users as $user)
                             @php
+                                // traité month
                                 $trait = $user->reportedMonth(session()->has('month') ? session('month') : $month)->count();
-                                // $trait = $user->reports()
-                                //     ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
-                                //     ->count();
+                                
+                                // traité Day
+                                $traitDay = $user->reportedDay(
+                                    session()->has('day') ? session('d') : $day,
+                                    session()->has('month') ? session('month') : $month,
+                                    session()->has('year') ? session('year') : $year
+                                    )
+                                    ->count();
 
-                                /* $brut = $user->reportedMonth(session()->has('month') ? session('month') : $month)
-                                    ->whereNotIn('status_id', Config::get('status.noValid'))->whereNotIn('status_id', [3])->count();
-                                */
-                                // $pris = $user->reportedMonth(session()->has('month') ? session('month') : $month)
-                                //     ->whereIn('status_id', [4, 5, 6, 7, 8, 10])->count();
+
                                 $pris = $user->reports()
                                     ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
                                     ->whereHas('fiche', function($q){
                                         $q->whereNotIn('status_id', Config::get('status.noValid'));
                                     })->count();
 
-                                /* $conf = $user->reportedMonth(session()->has('month') ? session('month') : $month)
-                                    ->where('d_confirm', '>=', DB::raw('d_repo'))->get(); */
+                                $prisDay = $user->reports()
+                                    ->whereDay('created_at', session()->has('day') ? session('day') : $day)
+                                    ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
+                                    ->whereYear('created_at', session()->has('year') ? session('year') : $year)
+                                    ->whereHas('fiche', function($q){
+                                        $q->whereNotIn('status_id', Config::get('status.noValid'));
+                                    })->count();
 
-                                // $conf = $f->confirmedMonth(session()->has('month') ? session('month') : $month, session()->has('year') ? session('year') : $year)->where('repo_id', $user->id)->count();
                                 $conf = $user->reports()
                                     ->whereIn('state', [1,2])
                                     ->whereMonth('updated_at', session()->has('month') ? session('month') : $month)
-                                    ->whereYear('updated_at', session()->has('year') ? session('year') : $year)->count();
-                                // $conf = $user->reports()
-                                //     ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
-                                //     ->whereHas('fiche', function($q){
-                                //         $q->where('d_confirm' ,'>=', )
-                                //     })
+                                    ->whereYear('updated_at', session()->has('year') ? session('year') : $year)
+                                    ->count();
 
-                                // $env = $f->sended(session()->has('month') ? session('month') : $month, session()->has('year') ? session('year') : $year)->where('repo_id', $user->id)
-                                //     ->where('d_env', '>=', DB::raw('d_repo'))
-                                //     ->whereIn('status_id', [7, 8, 10])->count();
+                                $confDay = $user->reports()
+                                    ->whereIn('state', [1,2])
+                                    ->whereDay('created_at', session()->has('day') ? session('day') : $day)
+                                    ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
+                                    ->whereYear('created_at', session()->has('year') ? session('year') : $year)
+                                    ->count();
+ 
                                 $env = $user->reports()
                                     ->where('state', 2)
                                     ->whereMonth('updated_at', session()->has('month') ? session('month') : $month)
                                     ->whereYear('updated_at', session()->has('year') ? session('year') : $year)->count();
+                                
+                                $envDay = $user->reports()
+                                    ->where('state', 2)
+                                    ->whereDay('created_at', session()->has('day') ? session('day') : $day)
+                                    ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
+                                    ->whereYear('created_at', session()->has('year') ? session('year') : $year)
+                                    ->count();
+                                    
                             @endphp
                             <tr>
                                 {{-- user_id --}}
                                 <td style="vertical-align:middle;">{{$user->id}}</td>
                                 {{-- user name --}}
                                 <td style="vertical-align:middle;"><a href="{{ url('rapports/user', [$user->id, 7, session()->has('month') ? session('month') : $month, date('Y')]) }}">{{$user->name}}</a></td>
-                                    {{-- Traité --}}
+                                {{-- Traité --}}
                                 <td style="vertical-align:middle;"> 
-                                    <a href="{{url('rapports/user/details/report', [$user->id, 'trait', session()->has('month') ? session('month') : $month])}}">{{ $trait }}</a>
+                                    <a href="{{url('rapports/user/details/report', [$user->id, 'trait', session()->has('month') ? session('month') : $month])}}">{{$traitDay}} / {{ $trait }}</a>
                                 </td>
-                                {{-- Brut --}}
-                                {{-- <td style="vertical-align:middle;"> 
-                                    <a href="#">{{ $brut }}</a>
-                                </td> --}}
                                 {{-- pris --}}
                                 <td style="vertical-align:middle;"> 
-                                    <a href="{{url('rapports/user/details/report', [$user->id, 'pris', session()->has('month') ? session('month') : $month])}}">{{ $pris }}</a>
+                                    <a href="{{url('rapports/user/details/report', [$user->id, 'pris', session()->has('month') ? session('month') : $month])}}">{{$prisDay}} / {{ $pris }}</a>
                                 </td>
                                 {{-- confirmées --}}
                                 <td style="vertical-align:middle;">
@@ -110,7 +121,7 @@
                                             session()->has('year') ? session('year') : $year
                                             ])
                                     }}">
-                                    {{ $conf }}
+                                    {{$confDay}} / {{ $conf }}
                                     </a>
                                 </td>
                                 {{-- envoyées --}}
@@ -118,7 +129,7 @@
                                     <a href="{{url('rapports/user/details/report', [
                                         $user->id, 'env', session()->has('month') ? session('month') : $month,
                                         session()->has('year') ? session('year') : $year,
-                                    ])}}">{{ $env }}</a>
+                                    ])}}">{{$envDay}} / {{ $env }}</a>
                                 </td>
                                 <td style="vertical-align:middle;">
                                     {{ round($env * 100 / max($trait, 1), 2) }} %

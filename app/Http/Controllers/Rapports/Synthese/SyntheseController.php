@@ -11,11 +11,10 @@ use Illuminate\Support\Facades\View;
 
 class SyntheseController extends Controller
 {
-    
+
     public function __construct()
     {
         View::share('title', 'Rapports - Synthese');
-
     }
     /**
      * Created Today
@@ -37,7 +36,7 @@ class SyntheseController extends Controller
         $d == null ? $d = date('d') : $d = null;
         $m == null ? $m = date('m') : $d = null;
         $y == null ? $y = date('Y') : $y = null;
-        
+
 
 
         // created today by agent
@@ -48,22 +47,22 @@ class SyntheseController extends Controller
         // Ecouted month
         $ecouted = $f->ecoutedMonth($m)->whereDay('d_ecoute', $d)->get();
 
-        $ecoutedValid = $ecouted->filter(function($val, $key){
+        $ecoutedValid = $ecouted->filter(function ($val, $key) {
             return $val['valid_after_ecoute'] == 1;
         });
-        $ecoutedNoValid = $ecouted->filter(function($val, $key){
+        $ecoutedNoValid = $ecouted->filter(function ($val, $key) {
             return $val['no_valid_after_ecoute'] == 1;
         });
 
 
         // Report Total
         $reported = $f->reportedMonth($m)->whereDay('d_repo', date('d'))->get();
-        $reportCreated = $reported->filter(function($val, $ekey){
+        $reportCreated = $reported->filter(function ($val, $ekey) {
             return $val['repo_id'] == $val['user_id'];
         });
         // Confirmed
-        $confirmed = $f->confirmedToday()->get();   
-        
+        $confirmed = $f->confirmedToday()->get();
+
         // Sended
         $sended = $f->sended($m)->whereDay('d_env', $d)->get();
 
@@ -75,22 +74,22 @@ class SyntheseController extends Controller
         // rdv demain
         $rdvDemain = Fiche::whereDate('d_rv', Carbon::tomorrow())->get();
 
-        $piDemain = $rdvDemain->filter(function($val, $key){
+        $piDemain = $rdvDemain->filter(function ($val, $key) {
             return $val['status_id'] == 11;
         });
-        $hcDemain = $rdvDemain->filter(function($val, $key){
+        $hcDemain = $rdvDemain->filter(function ($val, $key) {
             return $val['status_id'] == 12 || $val['status_id'] == 13 || $val['status_id'] == 14 || $val['status_id'] == 15 || $val['status_id'] == 16;
         });
-        $nrpDemain = $rdvDemain->filter(function($val, $key){
+        $nrpDemain = $rdvDemain->filter(function ($val, $key) {
             return $val['status_id'] == 28;
         });
-        $reportDemain = $rdvDemain->filter(function($val, $key){
+        $reportDemain = $rdvDemain->filter(function ($val, $key) {
             return $val['status_id'] == 3;
         });
-        $confDemain = $rdvDemain->filter(function($val, $key){
+        $confDemain = $rdvDemain->filter(function ($val, $key) {
             return $val['d_confirm'] != null && !in_array($val['status_id'], \Config::get('status.noValid'));
         });
-        $aConfDemain = $rdvDemain->filter(function($val, $key){
+        $aConfDemain = $rdvDemain->filter(function ($val, $key) {
             return $val['status_id'] == 4;
         });
 

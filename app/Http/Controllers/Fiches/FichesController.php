@@ -46,7 +46,7 @@ class FichesController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $user = $request->user();
         $data = $request->all();
         $date_rendez_vous = FicheHelper::getDateHeure($request->date_rendez_vous);
@@ -60,8 +60,8 @@ class FichesController extends Controller
             $fiche = $createdFiche['fiche'];
             $data = $createdFiche['data'];
 
-            if(Auth::user()->role_id == 7)
-            {
+            // If user is Report or Report Call 3 (id = 15)
+            if (Auth::user()->role_id == 7 ||  Auth::user()->role_id == 15) {
                 // Create new Report with ReportManager
                 ReportHelper::newReport($fiche->id);
             }
@@ -85,12 +85,15 @@ class FichesController extends Controller
 
             $data = StatusHelper::formatStatus($data, $fiche, $old_status, $new_status);
 
-            // verification si ARchive exite dans request
-            // if existe => ArchiveController
-            if($request->archive){
+            /**
+             * Admin can Archive from "Ciblée" to "Archive Ciblé"
+             * is_archived = 1
+             * @Adding Partenaire when passing to Archive Ciblé is temporaray.
+             */
+            if ($request->archive) {
                 $controller = new ArchiveController();
                 $parts = $request->partenaires;
-                $controller->putCibles($data,$parts);
+                $controller->putCibles($data, $parts);
             }
 
 
@@ -119,11 +122,12 @@ class FichesController extends Controller
             }
 
             // Annulation du repot (ne compte plus pour l'utilisateur qui la fait)
-            if($request->report_annulation == "on"){
-                // $data['d_repo'] = $fiche->d_repo;
-                // dd($fiche->d_repo);
-                // $data['d_repo'] =  null;
-                ReportManager::where('user_id', $fiche->repo_id)->where('fiche_id', $fiche->id)->delete();
+            if ($request->report_annulation == "on") {
+                // Delete the line on the reports table
+                // dd(ReportManager::where('user_id', 200)->get());
+                $report = ReportManager::where('user_id', $fiche->repo_id)->where('fiche_id', $fiche->id)->first();
+                $report->delete();
+                // dd(ReportManager::where('user_id', $fiche->repo_id)->where('fiche_id', $fiche->id)->first());
                 $data['data']['repo_id'] = null;
                 $data['data']['d_repo'] = null;
                 // $data['repo_id'] = null;
@@ -189,6 +193,4 @@ class FichesController extends Controller
     {
         return User::where('id', Fiche::find($request->id)->repo_id)->withTrashed()->first();
     }
-
-   
 }

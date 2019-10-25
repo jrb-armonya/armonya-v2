@@ -10,6 +10,7 @@ use App\Status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
+use App\Services\Groups\Models\Group;
 use App\Http\Controllers\Rapports\RapportsWeek;
 
 class RapportsController extends Controller {
@@ -21,12 +22,13 @@ class RapportsController extends Controller {
     public function index() {
         $rapports = ['Agent', 'Ecoute', 'Confirmation', 'Report'];
         $roles = Role::whereIn('name', $rapports)->get();
-        return view ('app.rapports.index', compact('roles'));
+        $groups = Group::All();
+        return view ('app.rapports.index', compact('roles' , 'groups'));
     }
 
     /**
      * Renvoi le rapports d'un certain role
-     * @param string $role name of the given role 
+     * @param string $role name of the given role  
      * @return view app.rapport.{nom du role}.index
      */
     public function getRapportsByRole($role) {
@@ -41,6 +43,28 @@ class RapportsController extends Controller {
         }
         $status = Status::all();
         return view('app.rapports.' . strtolower($role->name) . '.index', compact('role', 'users', 'status', 'month', 'year'));
+    }
+
+    public function getRapportsGroups()
+    {
+        $month = date('m');
+        $year = date('Y');
+        $groups = Group::all();
+        $status = Status::all();
+
+        return view('app.rapports.groups.index', compact('groups', 'status', 'month', 'year'));
+
+    }
+
+    public function getRapportsByGroup($id)
+    {
+        $month = date('m');
+        $year = date('Y');
+        $group = Group::find($id);
+        $status = Status::all();
+        $users = $group->users()->get();
+        return view('app.rapports.groups.group', compact('users','group', 'status', 'month', 'year'));
+        
     }
 
     public function weekProduction() {

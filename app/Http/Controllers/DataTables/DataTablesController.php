@@ -51,6 +51,7 @@ class DataTablesController extends Controller
 
     public function getData(Request $request)
     {
+
         // get the columns depends on the status
         // TODO: REfactoring dans une fonction a part getColumns
 
@@ -126,15 +127,14 @@ class DataTablesController extends Controller
         if ($datatable->datatable['data']) {
 
             // get the status if we need it.
-            if ($params['type'] == 'status' || $params['type'] == "done_status") {
+            if ($params['type'] == 'status' || $params['type'] == "done_status"  || $params['type'] == "Archive Ciblée") {
                 $status = Status::find($params['status_id']);
             }
 
             // execute the query
             $posts = $datatable->datatable['data']->get();
-
             foreach ($posts as $post) {
-                if ($params['type'] != 'status') {
+                if ($params['type'] != 'status' && $params['type'] != "Archive Ciblée") {
                     $status = null;
                 }
                 // if($params['type'] != 'status') { $status = null ;}

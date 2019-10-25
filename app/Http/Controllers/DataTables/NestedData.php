@@ -35,13 +35,20 @@ class NestedData {
         $nestedData['cab'] = SpanController::getCabSpan($post->l_rv, $post->arrondissement);
         $nestedData['restants'] = SpanController::getJoursRestants($post->d_rv);
         if(!isset($status)){
+
             $nestedData['status'] = "<span class='badge badge-status badge-status-{$post->status_id}'>{$post->status->name}</span>";
+
         }
         $nestedData['created_at'] = date('d/m/Y H:i', strtotime($post->created_at));
         $nestedData['user_id'] = SpanController::getUserSpan($post->user);
-        if( $status != null && $status->name ==  "Attente CR" || $status->name== "Ciblée")
+        
+        if( $status != null && ($status->name ==  "Attente CR" || $status->name== "Ciblée"))
         {
-            if($post->partenaire == null) { $nestedData['partenaire_id'] = null; } else $nestedData['partenaire_id'] = $post->partenaire->name;
+            if($post->partenaire == null) { 
+                $nestedData['partenaire_id'] = null; 
+            } 
+            else 
+            $nestedData['partenaire_id'] = $post->partenaire->name;
         }
 
         if($post->nrp == 0)

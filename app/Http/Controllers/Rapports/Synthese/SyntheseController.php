@@ -30,13 +30,29 @@ class SyntheseController extends Controller
      * Sended
      */
 
-    public function get($d = null, $m = null, $y = null)
+    public function searchByDate(Request $request)
+	{
+       
+		$date = $request->date;
+        if($date){
+            $dateArray = explode('-', $request->date);
+            $date = new \Carbon\Carbon($date);
+		    return $this->get($dateArray[0], $dateArray[1], $dateArray[2],$date);
+        }
+        else{
+            return $this->get();
+        }
+    }
+    public function get($d = null, $m = null, $y = null, $date=null)
     {
-
-        $d == null ? $d = date('d') : $d = null;
-        $m == null ? $m = date('m') : $d = null;
-        $y == null ? $y = date('Y') : $y = null;
-
+        if($d == null && $m == null && $y == null){
+          $d = date('d'); 
+          $m = date('m'); 
+          $y = date('Y');
+          $date= new \Carbon\Carbon($date);
+          $date->format('d/m/Y');
+        } 
+        
 
 
         // created today by agent
@@ -72,7 +88,7 @@ class SyntheseController extends Controller
 
 
         // rdv demain
-        $rdvDemain = Fiche::whereDate('d_rv', Carbon::tomorrow())->get();
+        $rdvDemain = Fiche::whereDate('d_rv',  $date->addDays(1))->get();
 
         $piDemain = $rdvDemain->filter(function ($val, $key) {
             return $val['status_id'] == 11;
@@ -113,6 +129,6 @@ class SyntheseController extends Controller
             'aConfDemain' => $aConfDemain->count(),
             'pourcentageDemain' => round($confDemain->count() * 100 / max($rdvDemain->count(), 1))
         ];
-        return view('app.rapports.synthese.index')->with('synthese', $synthese);
+        return view('app.rapports.synthese.index', compact('synthese', 'date'));
     }
 }

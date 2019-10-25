@@ -1,7 +1,12 @@
 <?php 
-    $myTraited = Auth::user()->reports()
-        ->whereMonth('created_at', date('m'))
-        ->count();
+
+    $myTraited = Auth::user()->reportedMonth(session()->has('month') ? session('month') : $month)->count();
+
+    $myPris = Auth::user()->reports()
+        ->whereMonth('created_at', session()->has('month') ? session('month') : $month)
+        ->whereHas('fiche', function($q){
+            $q->whereNotIn('status_id', Config::get('status.noValid'));
+        })->count();
 
     $rdv_ok = Auth::user()->reportedMonth(date('m'))->where('valid_after_ecoute', 1)->count();
 
@@ -18,6 +23,22 @@
 ?>
 {{-- Reports Traités --}}
 <div class="col-xl-3 col-sm-3">
+    <div class="card a-reporter mb-4" style="background: #9e41c5;">
+        <div class="card-body">
+            <div class="media d-flex align-items-center">
+                <div class="mr-4 rounded-circle bg-white sr-icon-box" style="background: #9e41c5; color: #9e41c5;">
+                    <i class="fa fa-edit"></i>
+                </div>
+                <div class="media-body text-white">
+                    <h4 class="text-uppercase mb-0 weight500">{{ $myTraited }}</h4>
+                    <span>Traitées</span>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+{{-- report pris --}}
+<div class="col-xl-3 col-sm-3">
     <div class="card a-reporter mb-4" style="background-color:#ffa604;">
         <div class="card-body">
             <div class="media d-flex align-items-center">
@@ -25,8 +46,8 @@
                     <i class="icon-calendar"></i>
                 </div>
                 <div class="media-body text-white">
-                    <h4 class="text-uppercase mb-0 weight500">{{ $myTraited }}</h4>
-                    <span>Traitées</span>
+                    <h4 class="text-uppercase mb-0 weight500">{{ $myPris }}</h4>
+                    <span>Pris</span>
                 </div> 
             </div>
         </div>
@@ -68,7 +89,7 @@
 </div>
 
 {{-- Qualtié % --}}
-<div class="col-xl-3 col-sm-3">
+<div class="col-xl-12 col-sm-12">
     <div class="card confirm mb-4" style="background-color:#22ae7a;">
         <div class="card-body">
             <div class="media d-flex align-items-center">

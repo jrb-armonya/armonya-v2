@@ -60,7 +60,7 @@ class Fiche extends Model
     }
     public function isCible()
     {
-        return $this->actions->where('action','Cible')->first();
+        return $this->actions->where('action', 'Cible')->first();
     }
 
     public function partenaire()
@@ -113,7 +113,7 @@ class Fiche extends Model
             })
             ->get();
     }
-    
+
     public function jPlus($d = null, $m = null, $y = null)
     {
 
@@ -204,6 +204,14 @@ class Fiche extends Model
     public function reportedMonth(int $month = null)
     {
         return Fiche::whereMonth('d_repo', $month)->whereYear('d_repo', date('Y'));
+    }
+
+
+    // reported $day 
+    // TODO: Use ReportRepository
+    public function reportedDay(int $day, int $month, int $year)
+    {
+        return Fiche::whereDay('d_repo', $day)->whereMonth('d_repo', $month)->whereYear('d_repo', $year);
     }
 
     // sended

@@ -83,7 +83,9 @@ class GroupsController extends Controller
 
         if($request->users) {
             foreach($request->users as $user) {
+                if($user != $request->user_id ){
                 $group->users()->attach([$user => ['role_id' => 2 ]]);
+                }
             }
         }
       

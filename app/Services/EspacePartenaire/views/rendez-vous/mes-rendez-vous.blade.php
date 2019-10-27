@@ -27,8 +27,8 @@
                     <th>Date rendez-vous</th>
                     <th>Heure rendez-vous</th>
                     <th>CP</th>
-                    <th>CAB</th>
                     <th>Date de réception</th>
+                    <th>Compte Rendu</th>
                     <th>Action</th> 
                 </thead>
                 <tbody>
@@ -39,12 +39,18 @@
                             <td>{{ $fiche->d_rv->format('d/m/Y')}}</td>
                             <td>{{ $fiche->h_rv }}</td>
                             <td>{{ $fiche->cp }}</td>
-                            <td>{{ $fiche->cab }}</td>
                             <td>{{ $fiche->d_env ? $fiche->d_env->format('d/m/Y H:i') : '' }}</td>
                             <td>
-                                <i class="ti-search btn-open-fiche" data-id="{{$fiche->id}}"></i>
-                            <a href="{{ url('/pdf/' . $fiche->id) }}" target="_blank"><i class="fa fa-file-pdf-o btn-historic"></i></a>
+                                @if($fiche->crs->where('partenaire_id', Auth::user()->emailPart->partenaire->id)->first())
+                                    <i class="fa fa-circle-o text-success"></i>
+                                @else
+                                    <i class="fa fa-circle-o text-danger"></i>
 
+                                @endif
+                            </td>
+                            <td>
+                                <i class="ti-search btn-open-fiche" data-id="{{$fiche->id}}"></i>
+                                <a href="{{ url('/pdf/' . $fiche->id) }}" target="_blank"><i class="fa fa-file-pdf-o btn-historic"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -57,12 +63,8 @@
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" id="fiche-modal">
     <div class="modal-dialog modal-lg"  style="width: 90%; box-sizing: border-box; box-shadow: 0px -1px 2px -2px black;">
         <div class="modal-content">
-            <div class="modal-header" style="background-color:black padding:5px; background-color: #4cc3fe;">
-                <h4 id="fiche-name" style="padding: 10px 0 0 5px; color:white;"></h4>
-                {{-- <label class="switch ml-auto">
-                    <input type="checkbox" id="lock-fiche" @if(isset($text) && $text=='Toutes les fiches') disabled @endif />
-                    <span class="slider round success"></span>
-                </label> --}}
+            <div class="modal-header" style="background-image: linear-gradient(#0f192f, #232a40); padding:5px; background-color: #4cc3fe;">
+                <h3 id="fiche-name" style="padding: 10px 0 0 5px; color:white; text-align:center;"></h3>
             </div>
             <div class="modal-body">
                 @include('app.fiches.form.espace-partenaire-form')

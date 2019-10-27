@@ -68,6 +68,8 @@ class EspacePartenaireController extends Controller
     public function mesRendezVous()
     {
         $partenaire = Auth::user()->partenaire()->first();
+        // TODO: Quelles sont les conditions pour que les fiches soit visible
+        // au Partenaire: status? Ciblées?
         $fiches = $partenaire->fiches;
         return view('espace-partenaire::rendez-vous.mes-rendez-vous')->with('fiches', $fiches);
     }

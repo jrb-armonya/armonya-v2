@@ -18,9 +18,26 @@
                     @include('app.partenaires.forms.add-email')
                 </div>
             </div>
+            <hr>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Espace Partenaire</h4>
+                    
+                    <a href="{{route('espace-partenaire.create', $partenaire->id)}}">
+                        <button class="btn btn-warning btn-large">
+                            <h5>
+                                <i class="icon-info"></i> Créer un espace partenaire
+                            </h5>
+                        </button>
+                    </a>
+                </div>
+            </div>
         </div>
     @endcomponent
-
+        
     {{-- Data table email-partenaire --}}
     @component('app.parts.tables.index')
         @slot('description')

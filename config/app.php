@@ -161,13 +161,13 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        
+
         /*
         * Package Service Providers...
         */
         // Jrb Excel
         // Jrb\Excel\ExcelServiceProvider::class,
-        
+
         /*
         * Application Service Providers...
         */
@@ -176,9 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
-        
-        
+
+
+
         //Export PDF
         Barryvdh\DomPDF\ServiceProvider::class,
         App\Services\Factures\FacturesServiceProvider::class,
@@ -186,6 +186,7 @@ return [
         App\Services\Predictif\PredictifServiceProvider::class,
         App\Services\Security\SecurityServiceProvider::class,
         App\Services\Groups\GroupsServiceProvider::class,
+        App\Services\EspacePartenaire\EspacePartenaireServiceProvider::class
 
     ],
 
@@ -238,7 +239,7 @@ return [
 
         //Export PDF
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        
+
 
         // My Facades
         "Printer" => App\Helpers\Printer::class,

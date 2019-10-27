@@ -74,6 +74,17 @@ class User extends Authenticatable
         return false;
     }
 
+    public function emailPart()
+    {
+        return $this->hasOne(PartenaireEmail::class);
+    }
+
+    // Partenaire
+    public function partenaire()
+    {
+        return $this->emailPart->partenaire;
+    }
+
     /**
      * Report Relation (from the extra table)
      * User can have multiple Reports

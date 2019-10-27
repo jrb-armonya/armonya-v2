@@ -1,4 +1,4 @@
-<form method="POST" action="/fiches/store" class="form" id="fiche-form">
+<form method="POST" action="{{url('/espace-partenaire/send-cr')}}" class="form" id="fiche-form">
     @csrf
     @if( \Request::route()->getName() != 'fiche.create' ) 
     <input type="hidden" name="id" id="id" value="">
@@ -7,12 +7,12 @@
     @include('app.fiches.form.prospect')
     <dl class="toggle">
         <dt>
-            <a href="" 
-                style="font-size: 20px;
-                background-color: #4cc3fe;
+            <a 
+                style="
+                background-image: linear-gradient(#0f192f, #232a40);
                 text-align:center;
                 color: white;">
-                <span style="">Voir plus ...</span>
+                <span style="">Détails ...</span>
             </a>
         </dt>
         <dd>

@@ -17,8 +17,12 @@ class DashboardController extends Controller
 
     public function index()
     {
+        // if User is Partenaire redirect to /espace-partenaire
+        if (request()->user()->role_id == 10) {
+            return redirect('/espace-partenaire');
+        }
         $month = date('m');
-        $widgets = Widget::where('role_id' , Auth::user()->role_id)->get();
+        $widgets = Widget::where('role_id', Auth::user()->role_id)->get();
         $status = Status::where('isActive', 1)->get();
         $title = "Dashboard";
         $roles = Role::all();
@@ -27,50 +31,51 @@ class DashboardController extends Controller
     }
 
 
-    private function checkRole(){
+    private function checkRole()
+    {
         $fiches = new CheckRole();
         return $fiches->check(Auth::user());
 
 
 
-        if($user->role_id == 6){
+        if ($user->role_id == 6) {
             // Created by Agents (today / month)
-            $fichesAgents = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->whereHas('user', function($q){
+            $fichesAgents = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->whereHas('user', function ($q) {
                 $q->where('role_id', 2);
             })->get();
-            $fichesAgentsDay = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->whereDay('created_at', date('d'))->whereHas('user', function($q){
+            $fichesAgentsDay = Fiche::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->whereDay('created_at', date('d'))->whereHas('user', function ($q) {
                 $q->where('role_id', 2);
             })->get();
             // validate (day / month)
-            $fichesValidMonth = $fichesAgents->filter(function($val, $key){
+            $fichesValidMonth = $fichesAgents->filter(function ($val, $key) {
                 return $val['valid_after_ecoute'] == 1;
             });
-            $fichesValidDay = $fichesAgentsDay->filter(function($val, $key){
+            $fichesValidDay = $fichesAgentsDay->filter(function ($val, $key) {
                 return $val['valid_after_ecoute'] == 1;
             });
             // noValidate (day / month)
-            $fichesNoValidMonth = $fichesAgents->filter(function($val, $key){
+            $fichesNoValidMonth = $fichesAgents->filter(function ($val, $key) {
                 return $val['no_valid_after_ecoute'] == 1;
             });
-            $fichesNoValidDay = $fichesAgentsDay->filter(function($val, $key){
+            $fichesNoValidDay = $fichesAgentsDay->filter(function ($val, $key) {
                 return $val['no_valid_after_ecoute'] == 1;
             });
 
             // Domicile (day / month)
-            $fichesDomicileMois = $fichesAgents->filter(function($val, $key){
+            $fichesDomicileMois = $fichesAgents->filter(function ($val, $key) {
                 return $val['l_rv'] == 1;
             });
-            $fichesDomicileJour = $fichesAgentsDay->filter(function($val, $key){
+            $fichesDomicileJour = $fichesAgentsDay->filter(function ($val, $key) {
                 return $val['l_rv'] == 1;
             });
-            $fichesDomicileSemaineMois = $fichesAgents->filter(function($val, $key){
+            $fichesDomicileSemaineMois = $fichesAgents->filter(function ($val, $key) {
                 return $val['l_rv'] == 4;
             });
-            $fichesDomicileSemaineJour = $fichesAgentsDay->filter(function($val, $key){
+            $fichesDomicileSemaineJour = $fichesAgentsDay->filter(function ($val, $key) {
                 return $val['l_rv'] == 4;
             });
 
-        
+
             return  [
                 'fichesAgents' => $fichesAgents,
                 'fichesAgentsDay' => $fichesAgentsDay,
@@ -84,11 +89,8 @@ class DashboardController extends Controller
                 'fichesDomicileSemaineMois' => $fichesDomicileSemaineMois,
                 'fichesDomicileSemaineJour' => $fichesDomicileSemaineJour,
             ];
-        }
-        else {
+        } else {
             return null;
         }
     }
-
-
 }

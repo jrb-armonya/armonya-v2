@@ -14,5 +14,11 @@ Route::group(
         Route::get('rendez-vous', 'EspacePartenaireController@mesRendezVous');
         Route::get('factures', 'EspacePartenaireController@factures');
         Route::get('factures/show/{id}', 'EspacePartenaireController@facturesShow');
+
+        // Partenaire send compte rendu
+        Route::post('send-cr', 'SendCR@handle');
+
+        // get the CR value of a Fiche
+        Route::post('getCRValue', 'GetCR@last');
     }
 );

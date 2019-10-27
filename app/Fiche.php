@@ -97,25 +97,25 @@ class Fiche extends Model
                 $query->where('role_id', '=', 2);
             })->where('status_id', '!=', 29);
     }
-     
+
     //All fiches create by users have group
-    public static function thisMonthGroups( $month, $year=null )
+    public static function thisMonthGroups($month, $year = null)
     {
         return self::whereMonth('created_at', $month)->whereYear('created_at', date('Y'))
             ->whereHas('user', function ($query) {
-                $query->whereHas('groups', function($q){
-                $q->where('group_id', '!=', null);
+                $query->whereHas('groups', function ($q) {
+                    $q->where('group_id', '!=', null);
                 });
             })->where('status_id', '!=', 29);
     }
-    
+
     //fiches create by group
-    public static function thisMonthGroup($id, $month , $year=null)
+    public static function thisMonthGroup($id, $month, $year = null)
     {
         return self::whereMonth('created_at', $month)->whereYear('created_at', date('Y'))
             ->whereHas('user', function ($query) use ($id) {
-                $query->whereHas('groups', function($q) use ($id) {
-                $q->where('group_id', $id);
+                $query->whereHas('groups', function ($q) use ($id) {
+                    $q->where('group_id', $id);
                 });
             })->where('status_id', '!=', 29);
     }
@@ -124,8 +124,8 @@ class Fiche extends Model
     {
         return self::whereDay('created_at', date('d'))->whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))
             ->whereHas('user', function ($query) use ($id) {
-                $query->whereHas('groups', function($q) use ($id) {
-                $q->where('group_id', $id);
+                $query->whereHas('groups', function ($q) use ($id) {
+                    $q->where('group_id', $id);
                 });
             })->where('status_id', '!=', 29);
     }
@@ -251,5 +251,12 @@ class Fiche extends Model
     public function sended($month = null)
     {
         return Fiche::whereMonth('d_env', $month)->whereYear('d_env', date('Y'));
+    }
+
+
+    // Compte Rendu
+    public function crs()
+    {
+        return $this->hasMany(CR::class);
     }
 }

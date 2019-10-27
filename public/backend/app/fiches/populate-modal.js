@@ -1,4 +1,4 @@
-function getReportUser(id){
+function getReportUser(id) {
     let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         /* the route pointing to the post function */
@@ -148,7 +148,7 @@ function populateModal(data) {
     $('#fiche-name').append(data.id + ' - ' + data.name + ' ' + data.prenom + ' - Le ' + newDate + ' à ' + data.h_rv)
 
     //if fiche has report_id
-    if(data.repo_id != null) {
+    if (data.repo_id != null) {
         getReportUser(data.id);
         // console.log(reportedUser);
     }

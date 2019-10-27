@@ -35,6 +35,8 @@
     <link href="{{ asset('/backend/assets/vendor/icheck/skins/all.css') }}" rel="stylesheet">
     <!--vector maps -->
     <link href="{{ asset('/backend/assets/vendor/vector-map/jquery-jvectormap-1.1.1.css') }}" rel="stylesheet">
+    <!-- toastr  -->
+    <link href="{{ asset('/backend/assets/vendor/toastr-master/toastr.css') }}" rel="stylesheet">
     <!--c3chart-->
     <link href="{{ asset('/backend/assets/vendor/c3chart/c3.min.css') }}" rel="stylesheet">
     @yield('css')
@@ -53,7 +55,7 @@
 
 <body class="left-sidebar-fixed left-sidebar-dark header-fixed header-primary-color " id="app">
     @include('espace-partenaire::header.header')
-    @include('app.dashboard.parts.search')
+    {{-- @include('app.dashboard.parts.search') --}}
     
      
     <!--header start-->
@@ -89,34 +91,59 @@
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/sparkline/jquery.sparkline.js') }}"></script>
 <!--sparkline initialization-->
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/js-init/sparkline/init-sparkline.js') }}"></script>
-@if(Auth::user()->role_id == 1)
-<script type="text/javascript" src="{{ asset('backend/app/right-sidebar.js') }}"></script>
-@endif
+
+<!--toastr-->
+<script type="text/javascript" src="{{ asset('backend/assets/vendor/toastr-master/toastr.js') }}"></script>
 
 @yield('javascript')
 
-@yield("{{ Auth::user()->role->name }}")
-
 <script type="text/javascript" src="{{ asset('backend/assets/js/scripts.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/backend/assets/js/search.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ asset('/backend/assets/js/search.js') }}"></script> --}}
 <script>
-// disable Enter event on all forms expect the textareas
-$(document).ready(function() {
-  $(window).keydown(function(event){
-    if( event.keyCode == 13 && ( $(event.target).attr('id') != 'internal_comment')  ) {
-      if($(event.target).attr('id') != 'commentaire'){
-        event.preventDefault();
-        return false;
+  // disable Enter event on all forms expect the textareas
+  $(document).ready(function() {
+    $(window).keydown(function(event){
+      if( event.keyCode == 13 && ( $(event.target).attr('id') != 'internal_comment')  ) {
+        if($(event.target).attr('id') != 'commentaire'){
+          event.preventDefault();
+          return false;
+        }
       }
-    }
+    });
   });
-});
 
-// disable autocomplete for all forms 
-$('.fiche-input').attr('autocomplete', 'off');
+  // disable autocomplete for all forms 
+  $('.fiche-input').attr('autocomplete', 'off');
 
 </script>
+@if(Session::get('message'))
+<script>
+    var shortCutFunction = "";
+    var msg = "{{Session::get('message')}}"
+    var title = "{{Session::get('title')}}"
+    var type = "{{Session::get('type')}}"
+    var $showDuration = 300;
+    var $hideDuration = 300;
+    var $timeOut = 5000;
+    var $extendedTimeOut = 1000;
+    var $showEasing = "swing";
+    var $hideEasing = "linear";
+    var $showMethod = "fadeIn";
+    var $hideMethod = "fadeOut";
 
+    toastr.options = {
+        closeButton: true,
+        debug: false,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        preventDuplicates: false,
+        onclick: null
+    };
+
+    var $toast = toastr[type](msg, title); // Wire up an event handler to a button in the toast, if it exists
+    $toastlast = $toast;
+</script>
+@endif
 <div class="loader"></div>
 </body>
 </html>

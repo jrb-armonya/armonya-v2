@@ -21,11 +21,11 @@
             <li  style="color: white;">
                 <span>{{ Auth::user()->name }}</span>
             </li>
-            <li class="nav-item search-bar">
+            {{-- <li class="nav-item search-bar">
                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#searchModal">
                     <i class="vl_search"></i>
                 </button>
-            </li>
+            </li> --}}
            
             <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle mr-lg-3" id="alertsDropdown" href="dashboard-4.html#" data-toggle="dropdown"

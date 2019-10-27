@@ -10,27 +10,37 @@ class Partenaire extends Model
 {
 
     use SoftDeletes;
-    
+
     public $fillable = ['name', 'desc', 'prix_fiche'];
 
     //Get the partenaire mails
-    public function emails() {
+    public function emails()
+    {
         return $this->hasMany(PartenaireEmail::class);
     }
 
-    public function fiches() {
+    public function fiches()
+    {
         return $this->hasMany(Fiche::class);
     }
 
-    public function fichesCibled() {
+    public function fichesCibled()
+    {
         return $this->fiches->where('d_cible', '!=', null);
     }
 
-    public function factures(){
+    public function factures()
+    {
         return $this->hasMany(Facture::class);
     }
 
-    public function factureVide(){
+    public function factureVide()
+    {
         return $this->factures()->whereIn('status', ['vide', 'En Attente'])->get();
     }
+
+    // public function user()
+    // {
+    //     return $this->belongsToMany(User::class);
+    // }
 }

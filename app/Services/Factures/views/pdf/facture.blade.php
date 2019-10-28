@@ -1,37 +1,64 @@
-@extends('layouts.app')
-@section('content')
+<!DOCTYPE html>
+<head>
+    {{-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    {{-- <link href="{{ URL::asset('backend/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css"/> --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <style>
+        body , html { margin:0; padding:0;}
+    </style>
+</head>
+<body>
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body p-0">
-                    <div class="row p-3">
+                <div class="card-body">
+                    <div class="row">
                         <div class="col-md-12 text-center">
-                            <img src="{{ asset('common/logo_black.png') }}">
+                            <img src="http://armonya.fr/common/logo_black.png">
                         </div>
                     </div>
-                    <hr class="my-1">
-                    <div class="row pb-5 p-5">
-                        <div class="col-md-6">
-                            <p class="font-weight-bold mb-4">ARMONYA</p>
-                            <p class="mb-1">CENTRE AFFAIRE 4</p>
-                            <p>LA MARSA / TUNIS 2070</p>
-                            <p class="mb-1">TUNISIE</p>
-                            <p class="mb-1">P.O. BOX 2654313</p>
-                            <p class="mb-1">Capital 30 000 TND</p>
-                        </div>
-
-                        <div class="col-md-6 text-right">
-                            <p class="font-weight-bold mb-4">Facture #{{ $data->uiid }}</p>
-                            <p class="mb-1"><span class="text-muted">Date:</span>  {{$data->created_at->format('d/m/Y')}} </p>
-                            <p class="mb-1"><span class="text-muted">To: </span> {{$data->partenaire->name}}</p>
-                            <p class="mb-1"><span class="text-muted">Adresse: </span> </p>
-                        </div>
+                    <hr>
+                    <div class="row">
+                        <table width="100%">
+                            <tr>
+                                <td class="font-weight-bold">Armonya</td>
+                                <td class="font-weight-bold text-right">FACTURE #{{$data->uiid}}</td>
+                            </tr>
+                            <tr>
+                                <td>CENTRE AFFAIRE 4</td>
+                                <td class="text-right">Date</td>
+                            </tr>
+                            <tr>
+                                <td>LA MARSA/TUNIS 2070</td>
+                                <td class="text-right">To: {{ ucfirst(strtoupper($data->partenaire->name)) }} </td>
+                            </tr>
+                            <tr>
+                                <td>TUNISIE</td>
+                                <td class="text-right">Adresse</td>
+                            </tr>
+                            <tr>
+                                <td>P.O. BOX 2654313</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>Capital 30 000 TND</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
                     </div>
+                    <hr>
 
-                    <div class="row p-5">
+                    <div class="row">
                         <div class="col-md-12">
-                            <table class="table">
+                            <table class="table"  cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th class="border-0 text-uppercase small font-weight-bold">Description</th>
@@ -69,31 +96,22 @@
                                         <td>&nbsp;</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                        <td style="background-color: #b9cdce;"
-                                            class="text-uppercase small font-weight-bold">SOUS TOTAL</td>
-                                        <td style="background-color: #b9cdce;">
-                                            {{ $data->fiches->count() * $data->partenaire->prix_fiche }} €
-                                        </td>
+                                        <td style="padding: 1px;" colspan="2">&nbsp;</td>
+                                        <td style="background-color: #b9cdce; padding: 1px;" class="text-uppercase small font-weight-bold">SOUS TOTAL</td>
+                                        <td style="background-color: #b9cdce; padding: 1px;" class="text-right">50 €</td>
                                     </tr>
 
 
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                        <td style="background-color: #b9cdce;"
-                                            class="text-uppercase small font-weight-bold">MONTANT TOTAL</td>
-                                        <td style="background-color: #b9cdce;">
-                                            {{ $data->fiches->count() * $data->partenaire->prix_fiche }} €
-                                        </td>
+                                    <tr >
+                                        <td style="padding: 1px;" colspan="2">&nbsp;</td>
+                                        <td style="background-color: #b9cdce; padding: 1px;" class="text-uppercase small font-weight-bold">MONTANT TOTAL</td>
+                                        <td style="background-color: #b9cdce; padding: 1px;" class="text-right">50 €</td>
                                     </tr>
 
                                     <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                        <td style="background-color: #b9cdce;"
-                                            class="text-uppercase small font-weight-bold">TOTAL DUE</td>
-                                        <td style="background-color: #b9cdce;">
-                                            {{ $data->fiches->count() * $data->partenaire->prix_fiche }} €
-                                        </td>
+                                        <td style="padding: 1px;" colspan="2">&nbsp;</td>
+                                        <td style="background-color: #b9cdce; padding: 1px;" class="text-uppercase small font-weight-bold">TOTAL DUE</td>
+                                        <td style="background-color: #b9cdce; padding: 1px;" class="text-right">50 €</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -103,28 +121,25 @@
             </div>
         </div>
     </div>
-
-    <div class="mt-5 mb-5 small">
+    
+    <div class="small">
         <p>
             We do expect payment within 7 days, so please process this invoice within that time.
         </p>
         <p>
-            We will exercise our statutory right to claim interest (at 8 per cent over the Bank of BANK ABC base rate)
-            and compensation.
+            We will exercise our statutory right to claim interest (at 8 per cent over the Bank of BANK ABC base rate) and compensation.
         </p>
         <p>
-            for debt recovery costs under the Late Payment legislation if we are not paid according to our agreed credit
-            terms.
+            for debt recovery costs under the Late Payment legislation if we are not paid according to our agreed credit terms.
         </p>
         <p>
             MONEY TRANSFERT TO THE ACCOUNT BELOW
         </p>
     </div>
-    <div class="mt-5 mb-5 small text-center font-weight-bold">
+    <div class="small text-center font-weight-bold">
         Thank you for your business
     </div>
-
-
 </div>
-
-@endsection
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

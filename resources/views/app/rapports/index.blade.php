@@ -103,8 +103,7 @@
                         <div class="card-body">
                             <div class="media d-flex align-items-center">
                                 <div class="mr-4 rounded-circle sr-icon-box text-white">
-                                    <i class="ti-pie-chart"></i>
-                                </div>
+                                    <i class="fa fa-users"></i>                                </div>
                                 <div class="media-body text-light">
                                     <h4 class="text-uppercase mb-0 weight500">Groups</h4>
                                     <span> {{$groups->count()}} </span>

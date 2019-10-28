@@ -28,9 +28,11 @@
                 <th class="text-right">
                     <button
                         type="button" 
+                        id="delete_ok"
                         class="btn btn-link form-pill btn-action delete-btn"
-                        data-id={{ $email->id }}> 
-                        <a href="/configuration/partenaires/delete/email/{{$email->id}}"></a><i class="fa fa-trash icon-action-red"></i>
+                        data-id={{ $email->id }}
+                        data-toggle="modal" data-target="#email-delete" data-whatever="@mdo"> 
+                        <i class="fa fa-trash icon-action-red"></i>
                     </button>
                 </th>
                 

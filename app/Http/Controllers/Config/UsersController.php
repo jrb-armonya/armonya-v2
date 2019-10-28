@@ -97,7 +97,7 @@ class UsersController extends Controller
 
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
-        return $user;
+        return Redirect()->back();
     }
 
 }

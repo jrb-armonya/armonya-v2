@@ -7,7 +7,8 @@ use App\PDFFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 
-trait Exportable{
+trait Exportable
+{
 
     /**
      * download
@@ -21,32 +22,32 @@ trait Exportable{
      * @param String $storageDir dossier dans le quel enregistrer
      * @return void
      */
-    public function generatePDF(Model $model, String $view, String $storageDir){
+    public function generatePDF(Model $model, $view, String $storageDir)
+    {
         // Load the pdf
         $pdf = PDF::loadView($view, ['data' => $model]);
 
         $this->checkStorageDir($storageDir);
 
         // Store the pdf
-        $pdf->save(storage_path($storageDir). $model->id .'.pdf');
+        $pdf->save(storage_path($storageDir) . $model->id . '.pdf');
 
         // Return the downlaod
         return $pdf->download();
     }
 
-    
+
     /**
      * checkStorageDir
      * create a dir in /storage folder if not exist
      * @param String $dir
      * @return void
      */
-    protected function checkStorageDir(String $storageDir){
+    protected function checkStorageDir(String $storageDir)
+    {
 
-        if( !File::exists( storage_path($storageDir) ) ) {
+        if (!File::exists(storage_path($storageDir))) {
             File::makeDirectory(storage_path($storageDir), $mode = 0777, true, true);
         }
-
     }
-
 }

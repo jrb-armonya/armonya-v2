@@ -126,7 +126,10 @@ class FichesController extends Controller
                 // Delete the line on the reports table
                 // dd(ReportManager::where('user_id', 200)->get());
                 $report = ReportManager::where('user_id', $fiche->repo_id)->where('fiche_id', $fiche->id)->first();
-                $report->delete();
+                if ($report) {
+                    $report->delete();
+                }
+
                 // dd(ReportManager::where('user_id', $fiche->repo_id)->where('fiche_id', $fiche->id)->first());
                 $data['data']['repo_id'] = null;
                 $data['data']['d_repo'] = null;

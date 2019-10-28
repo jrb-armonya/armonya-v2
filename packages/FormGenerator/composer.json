@@ -1,0 +1,22 @@
+{
+    "name": "jrb/form-generator",
+    "description": "Form Generator",
+    "type": "library",
+    "authors": [{
+        "name": "jrb",
+        "email": "jrb.youssef@gmail.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "Jrb\\FormGenerator\\": "src/"
+        }
+    },
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jrb\\FormGenerator\\FormGeneratorServiceProvider"
+            ]
+        }
+    }
+}

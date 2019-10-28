@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c67daf0e73f153775efa8f0dd397a7b",
+    "content-hash": "7e8fa12e509adef3bab6419bdee9a3f1",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1007,6 +1007,39 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "jrb/form-generator",
+            "version": "dev-form-generator",
+            "dist": {
+                "type": "path",
+                "url": "packages/FormGenerator",
+                "reference": "1377be68992d116989db164330669b96111eabe7",
+                "shasum": null
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jrb\\FormGenerator\\FormGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jrb\\FormGenerator\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "jrb",
+                    "email": "jrb.youssef@gmail.com"
+                }
+            ],
+            "description": "Form Generator",
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "kylekatarnls/update-helper",
@@ -6253,7 +6286,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "jrb/form-generator": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

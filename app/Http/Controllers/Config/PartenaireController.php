@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Config;
 
+use App\User;
+use App\Fiche;
 use App\Partenaire;
+use App\EmailPartenaire;
 use App\PartenaireEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\PartenaireRequest;
-use App\Fiche;
 
 class PartenaireController extends Controller
 {
@@ -66,6 +68,20 @@ class PartenaireController extends Controller
             }
         }
         $partenaire->delete();
+        return response()->json(['success' => 'success'], 200);
+    }
+
+    //Delete Email partenaire
+    public function deleteEmail(Request $request)
+    {
+        $partenaireEmail = PartenaireEmail::find($request->id);
+        if($partenaireEmail->user_id){
+            
+            $partenaireEmail->user()->delete();
+               
+            
+        }
+       $partenaireEmail->delete();
         return response()->json(['success' => 'success'], 200);
     }
 
@@ -143,4 +159,14 @@ class PartenaireController extends Controller
             return $partenaire->emails;
         }
     }
+
+    //Return the email of partenaire
+    public function getEmail(Request $request)
+    {
+        $email = PartenaireEmail::find($request->id);
+        if ($request->ajax()){
+            return $email;
+        }
+    }
+    
 }

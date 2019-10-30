@@ -15,7 +15,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <input type="submit" class="btn btn-danger" value="Supprimer" id="delete">
+                    <input type="submit" class="btn btn-danger" value="Supprimer" id="delete_partenaire">
                 </div>
         </div>
     </div>

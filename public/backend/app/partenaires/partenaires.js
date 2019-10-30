@@ -27,7 +27,7 @@ $(window).on('load', function () {
     })
 
     // When confirm delete
-    $("#delete").click(function(e){
+    $("#delete_partenaire").click(function(e){
         e.preventDefault();
         id = $("#PartenaireModal").html();
         $.ajax({
@@ -76,7 +76,7 @@ $(window).on('load', function () {
     })
 
      // When confirm delete email
-     $("#delete").click(function(e){
+     $("#delete_email").click(function(e){
         e.preventDefault();
         id = $("#EmailModal").html();
         console.log(id);

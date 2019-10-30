@@ -10,12 +10,12 @@
                 <div class="modal-body text-center">
                     <h1><i class="fa fa-warning" style="color: #f3516b;"></i></h1>
                     <p>Etes-vous sûr de vouloir supprimer?</p>
-                    <h3 id="#name-email-to-delete"></h3>
+                    <h3 id="name-email-to-delete"></h3>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <input type="submit" class="btn btn-danger" value="Supprimer" id="delete">
+                    <input type="submit" class="btn btn-danger" value="Supprimer" id="delete_email">
                 </div>
         </div>
     </div>

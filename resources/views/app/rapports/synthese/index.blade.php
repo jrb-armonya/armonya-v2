@@ -9,6 +9,7 @@
 <link href="{{ asset('/backend/assets/vendor/timepicker/css/timepicker.css') }}" rel="stylesheet">
 <link href="{{ asset('/backend/assets/vendor/date-picker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 <!--datetime & time picker-->
+@endsection
 @section('content')
 
         <div class="card-body">

@@ -3,9 +3,7 @@
 @section('css')
     <!--data table-->
     <link href="/backend/assets/vendor/data-tables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <style> 
-        
-    </style>
+   
 @endsection
 @section('content')
     {{-- User Create --}}
@@ -13,11 +11,11 @@
     
     {{-- DataTable --}}
     @include('app.partenaires.tables.index')
+    @include('app.partenaires.modals.confirm-delete')
     
-@endsection()
+@endsection
     
 {{-- Confirm Delete User --}}
-@include('app.partenaires.modals.confirm-delete')
 
 
 @section('javascript')

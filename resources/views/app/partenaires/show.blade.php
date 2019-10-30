@@ -21,21 +21,6 @@
             <hr>
         </div>
 
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4>Espace Partenaire</h4>
-                    
-                    <a href="{{route('espace-partenaire.create', $partenaire->id)}}">
-                        <button class="btn btn-warning btn-large">
-                            <h5>
-                                <i class="icon-info"></i> Créer un espace partenaire
-                            </h5>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </div>
     @endcomponent
         
     {{-- Data table email-partenaire --}}
@@ -45,5 +30,13 @@
         @endslot
 
         @include('app.partenaires.tables.emails')
+        @include('app.partenaires.modals.confirm-delete-email');
     @endcomponent
 @endsection()
+
+@section('javascript')
+<script src="{{ asset('backend/assets/vendor/data-tables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('backend/assets/vendor/data-tables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('backend/assets/vendor/js-init/init-datatable.js') }}"></script>
+<script src="{{ asset('/backend/app/partenaires/partenaires.js') }}"></script>
+@endsection

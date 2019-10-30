@@ -28,6 +28,7 @@
                     </button>
                     <button 
                         type="button" 
+                        id="delete_partenaire"
                         class="btn btn-link form-pill btn-action delete-btn"
                         data-id="{{ $item->id }}"
                         data-toggle="modal" data-target="#partenaire-delete" data-whatever="@mdo"> 

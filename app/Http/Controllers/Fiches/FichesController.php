@@ -61,7 +61,7 @@ class FichesController extends Controller
             $data = $createdFiche['data'];
 
             // If user is Report or Report Call 3 (id = 15)
-            if (Auth::user()->role_id == 7 ||  Auth::user()->role_id == 15) {
+            if (Auth::user()->role_id == 7 || Auth::user()->role_id == 15) {
                 // Create new Report with ReportManager
                 ReportHelper::newReport($fiche->id);
             }

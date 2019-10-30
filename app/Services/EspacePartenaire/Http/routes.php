@@ -16,7 +16,7 @@ Route::group(
         Route::get('factures/show/{id}', 'EspacePartenaireController@facturesShow');
 
         // Partenaire send compte rendu
-        Route::post('send-cr', 'SendCR@handle');
+        Route::post('send-cr', 'SendCompteRendu@handle');
 
         // get the CR value of a Fiche
         Route::post('getCRValue', 'GetCR@last');

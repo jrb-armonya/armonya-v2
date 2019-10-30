@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class SendCR extends Controller
+class SendCompteRendu extends Controller
 {
 
   protected $cr;

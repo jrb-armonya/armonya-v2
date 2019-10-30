@@ -50,10 +50,11 @@ class SyntheseController extends Controller
           $m = date('m'); 
           $y = date('Y');
           $date= new \Carbon\Carbon($date);
-          $date->format('d/m/Y');
         } 
         
-
+        
+        $demain=new \Carbon\Carbon($date);
+        $demain=$demain->addDays(1);
 
         // created today by agent
         $f = new Fiche();
@@ -85,11 +86,9 @@ class SyntheseController extends Controller
         /**
          * ============================================================
          */
-
-
         // rdv demain
-        $rdvDemain = Fiche::whereDate('d_rv',  $date->addDays(1))->get();
-
+        $rdvDemain = Fiche::whereDate('d_rv', $demain)->get();
+        
         $piDemain = $rdvDemain->filter(function ($val, $key) {
             return $val['status_id'] == 11;
         });

@@ -54,7 +54,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/add-email', 'PartenaireController@addEmail')->name('partenaires.add-email');
             Route::post('/getPartenaire', 'PartenaireController@getPartenaire');
             Route::post('/delete', 'PartenaireController@deletePartenaire');
-            
+            Route::post('/delete/email', 'PartenaireController@deleteEmail');
+            Route::post('/getEmail', 'PartenaireController@getEmail');
             // Route::post('/create-espace-partenaire', 'CreateEspacePartenaire@create');
 
         });

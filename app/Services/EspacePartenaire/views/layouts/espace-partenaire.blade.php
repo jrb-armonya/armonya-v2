@@ -9,11 +9,11 @@
     <!--favicon icon-->
     <link rel="shortcut icon" href="/armonya-v2.local/favicon.ico">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-    <title>Armonya | Espace Partenaire</title>
+    {{-- TODO: add the red dot when partenaire receive a notification (&#128308) --}}
+    <title> Armonya | Espace Partenaire</title>
     {{-- TODO: Will be deleted on OVH --}}
     <script src="{{asset('common/scripts.js')}}"></script>
-
+    <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
     <!--web fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -24,6 +24,10 @@
     {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v4/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"> --}}
     <link href="{{ asset('/backend/assets/vendor/simple-line-icons/css/simple-line-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('/backend/assets/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
 
     <!--icon font-->
     <link href="{{ asset('/backend/assets/vendor/dashlab-icon/dashlab-icon.css') }}" rel="stylesheet">
@@ -57,7 +61,6 @@
     @include('espace-partenaire::header.header')
     {{-- @include('app.dashboard.parts.search') --}}
     
-     
     <!--header start-->
     <div class="app-body">
         @include('espace-partenaire::sidebar.menu')
@@ -65,7 +68,8 @@
         <div class="content-wrapper">
             
             <div class="container-fluid">
-                @include('app.dashboard.components.page-title')
+                {{-- @include('app.dashboard.components.page-title') --}}
+                @include('espace-partenaire::header.page-title')
 
                 @yield('content')
 
@@ -79,6 +83,7 @@
 
 <!--basic scripts-->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/jquery/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -144,6 +149,30 @@
     $toastlast = $toast;
 </script>
 @endif
+
+
+
+{{-- Pusher Scripts --}}
+
+<script src="{{ asset('backend/app/partenaires/notifications.js') }}"></script>
+
+<script>
+
+  // Enable pusher logging - don't include this in production
+  // Pusher.logToConsole = true;
+
+  let pusher = new Pusher('9921784148646f12205a', {
+    cluster: 'eu',
+    forceTLS: true
+  });
+
+  let channel = pusher.subscribe('partenaire-{{Auth::user()->emailPart->partenaire->id}}');
+
+  channel.bind('Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', function(data) {
+    newNotification();
+  });
+
+</script>
 <div class="loader"></div>
 </body>
 </html>

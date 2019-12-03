@@ -173,7 +173,7 @@ body.fixed-nav {
 header
 ------------------------------------*/
 .app-header {
-    height: 60px;
+    /* height: 60px; */
     background: #f4f6f9;
 }
 
@@ -277,7 +277,7 @@ header links
 .header-links .dropdown-menu .dropdown-item {
     padding: .5rem 1.5rem;
     color: #737373;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Roboto", "Montserrat", sans-serif;
     font-size: 13px;
 }
 
@@ -340,7 +340,7 @@ header links
     position: relative;
     padding: .5rem 1.5rem;
     color: #737373;
-    font-family: "Montserrat", sans-serif;
+    font-family:"Roboto", "Montserrat", sans-serif;
     font-size: 13px;
 }
 

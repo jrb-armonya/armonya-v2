@@ -31,4 +31,9 @@ Route::group(['namespace' => 'App\Services\Predictif\Http\Controllers', 'prefix'
 
     /** ======= Files ========= */
     Route::post('/files/datatable', "DataTables\FileDataTable@getData")->name('get.data.file');
+
+
+    /** ======= Plugins ========= */
+    Route::get('/generator/invert/{id}', 'Plugins\InvertMagasin@invert');
+
 });

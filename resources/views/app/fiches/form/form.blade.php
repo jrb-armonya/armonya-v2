@@ -27,10 +27,16 @@
     <div class="row">
 
         @include('app.fiches.form.submit')
-        {{-- Bouton Archiver --}}
+        {{-- Bouton Archiver Temporary feature need to be deleted --}}
         @if(isset($status->id) && $status->id == 10)
             @include('app.fiches.form.archiver')
         @endif
     </div>
+</form>
+
+
+{{-- CR Zone has its own <form> --}}
+@if(isset($status->id) && ($status->id == 7 || $status->id == 10 || $status->id == 8))
+    @include('app.fiches.form.cr-zone')
+@endif
         
-</form> 

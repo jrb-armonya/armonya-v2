@@ -23,6 +23,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('update', 'UsersController@update');
             Route::post('delete', 'UsersController@delete');
             Route::post('create', 'UsersController@createUser')->name('create.user');
+
+            Route::get('myNotifications', 'UsersController@myNotifications');
+            Route::post('notifications/markAllNotificationsAsRead', 'UsersController@markAllNotificationsAsRead');
         });
 
         //roles
@@ -56,12 +59,23 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/delete', 'PartenaireController@deletePartenaire');
             Route::post('/delete/email', 'PartenaireController@deleteEmail');
             Route::post('/getEmail', 'PartenaireController@getEmail');
-            // Route::post('/create-espace-partenaire', 'CreateEspacePartenaire@create');
 
+            // Create a new espace partenaire
+            Route::get('/create-espace/{id}', 'CreateEspacePartenaire@create')
+                ->name('espace-partenaire.create');
         });
 
         
     });
+
+
+    // CR Routes
+    Route::group(['prefix' => 'crs', 'namespace' => 'CR'], function(){
+
+        Route::post('armonyaAddCr', 'CrController@armonyaAddCr')->name('armonya.cr.send');
+
+    });
+
 
     // Fiches
     Route::group(['prefix' => 'fiches', 'namespace' => 'Fiches'], function () {

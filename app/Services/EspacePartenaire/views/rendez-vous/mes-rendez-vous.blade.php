@@ -1,4 +1,8 @@
 @extends('espace-partenaire::layouts.espace-partenaire')
+
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+@endsection
 @section('breadcrumb')
 <nav aria-label="breadcrumb" class="d-inline-block ">
     <ol class="breadcrumb p-0">
@@ -11,16 +15,20 @@
 @section('content')
 <div class="col-md-12">
     <div class="card card-shadow mb-4">
-        <div class="card-header border-0">
-            <div class="custom-title-wrap bar-primary">
-                Mes rendez-vous
+        <div class="card-header border-0" style="background-color:#4cc3fe">
+            <div class="custom-title-wrap" style="border: none;">
+                <div class="custom-title" style="font-size: 20px; color:white;">
+                    Mes Rendez-vous
+                </div>
             </div>
         </div>
         <div class="card-body">
             <p>
-                Liste de vos rendez-vous
+                L'icone  <i class="ti-search btn-open-fiche"></i> 
+                permet de voir les détails du rendez-vous.
             </p>
-            <table class="table table-bordered  dataTable table-hover table-responsive" id="fiches-table" style="width:100%; display: inline-table !important;">
+            <p>Vous devez appuiez sur <code>Echap</code> pour fermer les détails du rendez-vous</p>
+            <table class="table table-bordered  dataTable table-hover table-responsive" id="fiches-table-partenaire" style="width:100%; display: inline-table !important;">
                 <thead>
                     <th>id</th>
                     <th>Nom</th>
@@ -28,7 +36,7 @@
                     <th>Heure rendez-vous</th>
                     <th>CP</th>
                     <th>Date de réception</th>
-                    <th>Compte Rendu</th>
+                    <th>CR</th>
                     <th>Action</th> 
                 </thead>
                 <tbody>
@@ -39,10 +47,10 @@
                             <td>{{ $fiche->d_rv->format('d/m/Y')}}</td>
                             <td>{{ $fiche->h_rv }}</td>
                             <td>{{ $fiche->cp }}</td>
-                            <td>{{ $fiche->d_env ? $fiche->d_env->format('d/m/Y H:i') : '' }}</td>
+                            <td>{{ $fiche->d_env ? $fiche->d_env->format('d/m/Y') : '' }}</td>
                             <td>
                                 @if($fiche->crs->where('partenaire_id', Auth::user()->emailPart->partenaire->id)->first())
-                                    <i class="fa fa-circle-o text-success"></i>
+                                    <i class="fa fa-circle-o text-success"> Envoyé</i>
                                 @else
                                     <i class="fa fa-circle-o text-danger"></i>
 
@@ -76,6 +84,7 @@
 @section('javascript')
     <!--datatables-->
     <script src="{{ asset('/backend/assets/vendor/data-tables/jquery.dataTables.min.js') }}"></script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.20/sorting/date-eu.js"></script>
     <script src="{{ asset('/backend/assets/vendor/data-tables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('/backend/assets/vendor/js-init/init-datatable.js') }}"></script>
     <script src="{{ asset('/backend/app/fiches/calcul-credits.js') }}"></script>

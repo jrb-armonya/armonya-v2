@@ -5,6 +5,7 @@ namespace App;
 use Auth;
 use App\Role;
 use App\Fiche;
+use App\PartenaireEmail;
 use App\Services\Groups\Models\Group;
 use Illuminate\Notifications\Notifiable;
 use App\Services\Groups\Models\GroupRole;
@@ -80,10 +81,10 @@ class User extends Authenticatable
     }
 
     // Partenaire
-    public function partenaire()
-    {
-        return $this->emailPart->partenaire;
-    }
+    // public function partenaire()
+    // {
+    //     return $this->emailPart->partenaire();
+    // }
 
     /**
      * Report Relation (from the extra table)

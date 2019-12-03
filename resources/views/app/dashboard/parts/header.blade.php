@@ -28,6 +28,21 @@
                 </button>
             </li>
         @endif
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle mr-lg-3" id="alertsDropdown" href="dashboard-4.html#" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="vl_bell"></i>
+                <div class="notification-alarm"  style="display:none;">
+                    <span class="wave wave-warning"></span>
+                    <span class="dot bg-warning"></span>
+                </div>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right header-right-dropdown-width pb-0" aria-labelledby="alertsDropdown" id="notif-container">
+                {{-- <a class="dropdown-item small" href="dashboard-4.html#">Voir toutes les notifications</a> --}}
+            </div>
+        </li>
         {{-- <li class="nav-item dropdown sm-device-none">
             <a class="nav-link dropdown-toggle mr-lg-3" id="messagesDropdown" href="dashboard-4.html#" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -149,6 +164,9 @@
                 aria-haspopup="true" aria-expanded="false">
                 <i class="icon-user"></i>
             </a>
+
+
+
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userNav">
                 <div class="dropdown-item- px-3 py-2">
                     {{-- <img class="rounded-circle mr-2" src="assets/img/avatar/avatar2.jpg.png" width="35" alt=""/> --}}

@@ -90,7 +90,7 @@
         <tr>
             <td class="tg-baqh fiche-pdf-title"> <b>AGE</b> </td>
             <td class="tg-baqh fiche-pdf-title"> <b>SITUATION</b> </td>
-            <td class="tg-baqh fiche-pdf-title"><b>REVENUE ANNUEL</b></td>
+            <td class="tg-baqh fiche-pdf-title"><b>REVENU ANNUEL</b></td>
             <td class="tg-baqh fiche-pdf-title"><b>CREDITS EN COURS</b></td>
         </tr>
         <tr>
@@ -132,7 +132,7 @@
     
     
         <tr>
-            <td class="tg-yw4l" colspan="4"><b>COMMNETAIRE</b> <br> {{ $data->commentaire }}</td>
+            <td class="tg-yw4l" colspan="4"><b>COMMENTAIRE</b> <br> {{ $data->commentaire }}</td>
         </tr>
     </table>
 </center>

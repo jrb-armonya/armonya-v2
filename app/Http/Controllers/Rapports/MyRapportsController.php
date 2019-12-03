@@ -39,9 +39,15 @@ class MyRapportsController extends Controller
 
     public function mesFiches()
     {
+         if(Auth::user()->role_id == 16) {
+
+            $fiches = Auth::user()->fiches;
+        }
+        else {
         $fiches = Auth::user()->fiches()
             ->whereMonth('created_at', date('m'))
             ->whereYear('created_at', date('Y'))->get();
+        }
         if (Request()->ajax()) {
             return $fiches;
         } else {
@@ -52,6 +58,7 @@ class MyRapportsController extends Controller
 
     public function nonConforme()
     {
+       
         $fiches = Auth::user()->fiches()->where('status_id', 21)->get();
         if (Request()->ajax()) {
             return $fiches;

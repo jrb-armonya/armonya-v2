@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Partenaires;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\Request;
-use App\Mail\FicheConfirmed;
 use App\Fiche;
 use App\Partenaire;
 use App\EmailPartenaire;
 use App\PartenaireEmail;
+use App\Mail\FicheConfirmed;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Events\PartenaireReceiveFiche;
 
 class PartenaireHelper extends Controller
 {
@@ -26,11 +27,10 @@ class PartenaireHelper extends Controller
      */
     public function sendEmailConfirmation($fiche, $path, $partenaire_emails, $partenaire_emails_cc = null)
     {
-
         Mail::send('layouts.emails.rdv-confirmed', ['fiche' => $fiche], function ($m) use ($fiche, $path, $partenaire_emails, $partenaire_emails_cc) {
-
+            
             $subject = "CONFIRMATION de votre RDV pour le " . $fiche->d_rv->format('d/m/Y') . " " . $fiche->h_rv . ". avec " . ucwords($fiche->name) . " " . ucwords($fiche->prenom);
-
+            
             $m->from(env('MAIL_USERNAME'), 'Votre Rendez-vous');
             $m->attach($path);
             // Partenaire mail
@@ -46,6 +46,13 @@ class PartenaireHelper extends Controller
                 }
             }
         });
+        
+
+        $partenaire = PartenaireEmail::find($partenaire_emails[0])->partenaire;
+        // Send the notifiation to the database
+        // Notification::send($partenaire, new PartenaireReceiveFicheNotification($fiche));
+        // send the pusher notification (real-time)
+        // event(new PartenaireReceiveFiche($fiche, $partenaire));
     }
 
     /**
@@ -71,19 +78,33 @@ class PartenaireHelper extends Controller
         });
     }
 
+    /**
+     * Send an Email to confirm New Espace Partenaire.
+     *
+     * @param [type] $partenaire_id
+     * @param [type] $email_id
+     * @param [type] $password
+     * @return void
+     */
     public function sendEmaiLConfirmationEspacePartenaire($partenaire_id, $email_id, $password)
     {
         $partenaire = Partenaire::find($partenaire_id);
+        
         $email = PartenaireEmail::find($email_id);
 
+        
+        
         Mail::send(
             'espace-partenaire::layouts.email-confirmation-espace',
+
             ['partenaire' => $partenaire, 'password' => $password],
+
             function ($m) use ($partenaire, $email) {
                 $subject = "Votre Espace Partenaire est prêt";
-                // $m->from('MAIL_USERNAME', 'jrb.youssef@gmail.com');
                 $m->to($email->email, $partenaire->name)->subject($subject);
             }
         );
+
+
     }
 }

@@ -3,13 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use App\Services\Factures\Models\Facture;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Partenaire extends Model
 {
 
-    use SoftDeletes;
+    use SoftDeletes, Notifiable;
 
     public $fillable = ['name', 'desc', 'prix_fiche'];
 
@@ -37,6 +38,12 @@ class Partenaire extends Model
     public function factureVide()
     {
         return $this->factures()->whereIn('status', ['vide', 'En Attente'])->get();
+    }
+
+
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'partenaire-'.$this->id;
     }
 
     // public function user()

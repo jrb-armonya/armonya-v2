@@ -6,11 +6,17 @@
     }
 </style>
 <div>
-    Bonjour, {{ $partenaire->name }} <br>
+    Bonjour, {{$partenaire->name}}<br>
     <br>
-    Votre espace est prêt. <br>
     <br>
-    Votre mot de passe est {{ $password }},
+    Vous pouvez vous connecter à votre <a href="https://armonya.fr/login">Espace Partenaire</a>. <br>
+    Votre mot de passe est <b>{{$password}}</b> <br>
+
+
+    Nous sommes encore en phase de test pour le mois en cours, <br>
+    nous comptons sur votre retour pour nous communiquer tout dysfonctionnement.
+
+
     <br><br> 
     L'équipe ARMONYA
 

@@ -7,7 +7,10 @@ use App\Role;
 use App\Fiche;
 use App\Status;
 use App\Widget;
+use App\Partenaire;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Dashboard\CheckRole;
+use App\Notifications\PartenaireReceiveFicheNotification;
 
 
 class DashboardController extends Controller
@@ -21,6 +24,8 @@ class DashboardController extends Controller
         if (request()->user()->role_id == 10) {
             return redirect('/espace-partenaire');
         }
+
+
         $month = date('m');
         $widgets = Widget::where('role_id', Auth::user()->role_id)->get();
         $status = Status::where('isActive', 1)->get();

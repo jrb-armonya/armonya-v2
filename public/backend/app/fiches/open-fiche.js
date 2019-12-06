@@ -1,11 +1,12 @@
 let fiche_id;
-$(document).ready(function () {
 
+$(document).ready(function () {
 
     let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
     //OPEN Fiche
-    $("#fiches-table").on("click", ".btn-open-fiche", function (e) {
+    $("#fiches-table-partenaire, #fiches-table").on("click", ".btn-open-fiche", function (e) {
+
         e.preventDefault();
 
         let lockFiche = $('#lock-fiche');
@@ -27,7 +28,7 @@ $(document).ready(function () {
                 $('body').addClass('loading');
             },
             success: function (data) {
-                // console.log(data);
+                console.log(data);
                 populateModal(data);
                 $('body').removeClass('loading');
             }

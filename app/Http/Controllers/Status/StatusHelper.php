@@ -103,10 +103,6 @@ class StatusHelper extends Controller
             $data['d_repo'] = \Carbon\Carbon::now();
         }
 
-        
-    
-
-
         //Entre dans A Reporter
         if( $new == 3 ) {
             $action->action = "Fiche reportée";
@@ -150,6 +146,14 @@ class StatusHelper extends Controller
         // A Envoyer
         if( $new == 6 ) {
             $action->action = "A Envoyer";
+        }
+
+        // Si on le sort de attente CR il faut que la fiche en soit plus attribué au Partenaire 
+        // donc partenaire_id = null;
+        if(($old == 7 && $new == 6) || ($old == 7 && $new == 3)) {
+            $data['partenaire_id'] = null;
+            $data['env_id'] = null;
+            $data['d_env'] = null;
         }
 
         // Entre dans Attente CR(fiche envoyé)
@@ -279,6 +283,10 @@ class StatusHelper extends Controller
         //si noValid
         else if( in_array($id, \Config('status.noValid'))){
             $allowed = Satus::whereIn([1, 2, 3 , 4 , 5, 6, 7, 8])->get();
+        }
+
+        else if( $id == 29 ){
+            $allowed = Status::all();
         }
         return $allowed->merge($noValid);
     }

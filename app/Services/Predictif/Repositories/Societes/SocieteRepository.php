@@ -29,7 +29,8 @@ class SocieteRepository extends Model{
      */
     public function getWithAvailablePhones()
     {
-        return $this->model->with('available_phones')->get();
+        // return $this->model->with('available_phones')->get();
+        return $this->model->get();
     }
 
     

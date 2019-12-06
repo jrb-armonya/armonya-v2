@@ -27,33 +27,18 @@
                 </button>
             </li> --}}
            
-            <li class="nav-item dropdown ">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-3" id="alertsDropdown" href="dashboard-4.html#" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="vl_bell"></i>
-                    <div class="notification-alarm">
+                    <div class="notification-alarm"  style="display:none;">
                         <span class="wave wave-warning"></span>
                         <span class="dot bg-warning"></span>
                     </div>
                 </a>
     
-                <div class="dropdown-menu dropdown-menu-right header-right-dropdown-width pb-0" aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header weight500">Notifications</h6>
-    
-                    <div class="dropdown-divider mb-0"></div>
-                    <a class="dropdown-item border-bottom" href="{{url('/espace-partenaire/profil')}}">
-                                <span class="text-success"> 
-                                <span class="weight500">
-                                    <i class="vl_bell weight600 pr-2"></i>Bienvenue :)</span>
-                                </span>
-                        <span class="small float-right text-muted">03:14 AM</span>
-    
-                        <div class="dropdown-message f12">
-                            Vous pouvez modifier votre mot de passe.
-                        </div>
-                    </a>
-    
-                    <a class="dropdown-item small" href="dashboard-4.html#">Voir toutes les notifications</a>
+                <div class="dropdown-menu dropdown-menu-right header-right-dropdown-width pb-0" aria-labelledby="alertsDropdown" id="notif-container">
+                    {{-- <a class="dropdown-item small" href="dashboard-4.html#">Voir toutes les notifications</a> --}}
                 </div>
             </li>
             <li class="nav-item dropdown ">

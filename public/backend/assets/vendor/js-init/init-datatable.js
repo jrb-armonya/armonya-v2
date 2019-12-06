@@ -1,7 +1,21 @@
+
+
 $(document).ready(function() {
+
+
     $('#data_table').DataTable({
         "deferRender": true,
         stateSave: true,
+    });
+
+    $('#fiches-table-partenaire').DataTable({
+        stateSave: true,
+        stateSaveParams: function (settings, data) {
+            data.search.search = "";
+        },
+        columnDefs: [
+            { "type": "date-eu", targets: [2, 5] }
+        ]
     });
 
     //DataTable for permissions in (role edit)

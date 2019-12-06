@@ -21,7 +21,7 @@
             <p>
                 Vous pouvez modifier votre mot de passe.
             </p>
-            <form id="partenaire-edit-password" action="{{ url('/espace-partenaire/update/profil') }}" method="POST">
+            <form id="partenaire-edit-password" action="{{ route('part.update.profile') }}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                 <div class="row mb-5">
@@ -29,7 +29,12 @@
                         <div class="form-row align-items-center">
                             <div class="col-md-12">
                                 <label for="password" class="col-form-label">Mot de passe <small> doit comporter au moins 8 caractères.</small></label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="mot de passe">
+                                <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" placeholder="mot de passe">
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                             <div class="col-md-12">
                                 <label for="password_confirmation" class="col-form-label">Confirmation du mot de passe</label>

@@ -48,16 +48,16 @@ class PredictifController extends Controller {
         // Societe <Collection>
         $this->societes = $societe->getWithAvailablePhones();
         // Available Societes <Collection>
-        $this->availableSocietes = $this->societes->filter(function($val, $key){
-            return $val['inFile'] == 1;
-        });
+        // $this->availableSocietes = $this->societes->filter(function($val, $key){
+        //     return $val['inFile'] == 1;
+        // });
         // Phones <int>
         $this->phones = $phone->countAll();
         // Available Phones Count <Int>
-        $this->availablePhonesCount = 0;
-        foreach($this->availableSocietes as $soc){
-            $this->availablePhonesCount += $soc->available_phones()->count();
-        }
+        // $this->availablePhonesCount = 0;
+        // foreach($this->availableSocietes as $soc){
+        //     $this->availablePhonesCount += $soc->available_phones()->count();
+        // }
 
     }
 
@@ -69,9 +69,9 @@ class PredictifController extends Controller {
     protected function shareCounters()
     {
         View::share('societes', $this->societes);
-        View::share('availableSocietes', $this->availableSocietes);
+        // View::share('availableSocietes', $this->availableSocietes);
         View::share('phonesCount', $this->phones);
-        View::share('availablePhonesCount', $this->availablePhonesCount);
+        // View::share('availablePhonesCount', $this->availablePhonesCount);
     }
 
     /**

@@ -30,7 +30,27 @@
             <div class="form-group row">
                 <textarea class="form-control" name="cr" id="compte-rendu" rows="3" required autofocus></textarea>
             </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="state" id="cible" value="Ciblé" checked>
+                <label class="form-check-label text-success" for="cible">Ciblé</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="state" id="lapin" value="Lapin">
+                <label class="form-check-label text-danger" for="lapin">Lapin</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="state" id="hc" value="Hc">
+                <label class="form-check-label text-danger" for="hc">Hc</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="state" id="rAudit" value="Refus d'audit">
+                <label class="form-check-label text-danger" for="rAudit">Refus d'audit</label>
+            </div>
         </div>
+        <hr>
+        <!-- CRS goes here with JS => populate-modal.js -->
+        <ul class="media-list" id="cr-zone"></ul>
     </div>
 </div>
 

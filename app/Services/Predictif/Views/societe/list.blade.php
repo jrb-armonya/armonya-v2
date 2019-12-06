@@ -18,8 +18,9 @@
                         <th>Adresse</th>
                         <th>Standard</th>
                         <th>Numéros</th>
-                        <th>Disponnibles</th>
+                        {{-- <th>Disponnibles</th> --}}
                         <th>Etat</th>
+                        <th>Reverse</th>
                         <th>Magasin</th>
                         <th>#</th>
                     </thead>
@@ -30,7 +31,7 @@
                             <td>{{$soc->adresse}}</td>
                             <td>{{$soc->standard}}</td>
                             <td>{{$soc->nbr_phones}}</td>
-                            <td>{{$soc->available_phones->count()}}</td>
+                            {{-- <td>{{$soc->available_phones->count()}}</td> --}}
                             <td>
                                 @if($soc->inFile)
                                     <i class="fa fa-circle text-green"> magasin </i>
@@ -38,6 +39,14 @@
                                 <i class="fa fa-circle text-danger"> pas magasin</i>
                                 @endif
                                 {{-- <i class="fa fa-circle   @if($soc->inFile) text-green @else text-danger @endif ">@if($soc->inFile) Mangasin @else Non magasin @endif</i> --}}
+                            </td>
+
+                            <td>
+                                @if($soc->inverted)
+                                    Inve
+                                @else
+                                    ----
+                                @endif
                             </td>
                             <td>
 
@@ -53,9 +62,14 @@
 
                             </td>
                             <td>
-                                <a href="{{route('societe.destroy', $soc->id)}}" onclick="return confirm('Tous les numéros de la societe seront supprimés! êtes-vous sûr de vouloir supprimer?')">
+                                <a href="{{route('societe.destroy', $soc->id)}}" style="font-size: 22px;" onclick="return confirm('Tous les numéros de la societe seront supprimés! êtes-vous sûr de vouloir supprimer?')">
                                     <i class="fa fa-trash text-danger"></i>
                                 </a>
+                                @if(!$soc->inverted)
+                                <a href="{{url('application/generator/invert', $soc->id)}}" style="font-size: 22px;" onclick="return confirm('Créer une inversion de la societe?')">
+                                    <i class="fa fa-angle-double-left text-primary"></i>
+                                </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -13,9 +13,11 @@ use App\ReportManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Report\ReportHelper;
 use App\Http\Controllers\Fiches\HistoricFiche;
 use App\Http\Controllers\Archive\ArchiveController;
+use App\Notifications\PartenaireReceiveFicheNotification;
 use App\Http\Controllers\Fiches\FicheHelper as FicheHelper;
 use App\Http\Controllers\Status\StatusHelper as StatusHelper;
 use App\Http\Controllers\Rapports\RapportsController as Rapports;
@@ -155,6 +157,12 @@ class FichesController extends Controller
                 $partenaireHelper->sendEmailConfirmation($fiche, $path, $data['data']['partenaire_emails'], $data['data']['partenaire_emails_cc']);
 
                 $action = Action::where('fiche_id', $fiche->id)->where('action', 'Partenaire')->where('partenaire_id', null)->where('user_id', Auth::user()->id)->update(['partenaire_id' => $fiche->partenaire_id]);
+
+                // Get the partenaire
+                $partenaire = Partenaire::find($fiche->partenaire_id);
+
+                Notification::send($partenaire, new PartenaireReceiveFicheNotification($fiche, $partenaire));
+
             }
         }
 
@@ -167,7 +175,7 @@ class FichesController extends Controller
      */
     public function getFiche(Request $request)
     {
-        $fiche = Fiche::find($request->id);
+        $fiche = Fiche::with('crs')->where('id', $request->id)->first();
         $fiche->open = true;
         $fiche->save();
         // openFiche($fiche);

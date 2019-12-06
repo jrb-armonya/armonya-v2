@@ -14,5 +14,5 @@
 @section('javascript')
     <script src="{{ asset('/backend/assets/vendor/chartjs/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('/backend/assets/vendor/js-init/chartjs/init-doughnut-chart.js') }}"></script>
-    <script src="{{ asset('/backend/app/presence.js') }}"></script>
+    {{-- <script src="{{ asset('/backend/app/presence.js') }}"></script> --}}
 @endsection

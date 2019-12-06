@@ -13,25 +13,44 @@
 
 {{-- @dd(Auth::user()->partenaire()); --}}
 <div class="row">
-    <div class="col-md-6 col-sm-12">
-        <div class="card card-shadow mb-4 bg-primary text-white">
-            <div class="card-body">
-                <div class="row d-flex align-items-center">
-                    <div class="col-sm-4 col-lg-4 text-center">
-                        <img class="d-inline-block mb-3 mb-lg-0" src="https://www.zuora.com/wp-content/uploads/2017/01/SS1-Iconfile-small-01-1280x1280.png" srcset="https://www.zuora.com/wp-content/uploads/2017/01/SS1-Iconfile-small-01-1280x1280.png" width="200px" alt="">
-                    </div>
-                    <div class="col-sm-8 col-lg-8">
-                        <h4 class="weight600 mb-0">{{ Auth::user()->name }}</h4>
-                        <small class=" f12 text-white">Bienvenue sur votre Espace Partenaire</small>
-                        <div class="widget-price mt-3">
-                            <span class="f24">
-                                {{ Auth::user()->partenaire()->first()->fiches->count() }}
-                            </span>
-                            {{-- <del class="">$ 4,432</del> --}}
-                        </div>
-                        <p class=" f12">Fiches au total</p>
-                    </div>
+    {{-- MES RENDEZ-VOUS --}}
+    <div class="col-xl-4 col-md-4">
+        <div class="card bg-primary text-white mb-4 py-1">
+            <div class="card-body card-widget">
+                <div class="float-right">
+                    <i class="fa fa-handshake-o fa-2x text-white"></i>
                 </div>
+                <h5 class="font-weight-bold mt-0" title="Number of Orders">Rendez-vous du mois</h5>
+                <h4 class="mt-3 mb-3 text-white">{{$fiches->count()}}</h4>
+                
+            </div>
+        </div>
+    </div>
+
+    {{-- MES CRs --}}
+    <div class="col-xl-4 col-md-4">
+        <div class="card bg-success text-white mb-4 py-1">
+            <div class="card-body card-widget">
+                <div class="float-right">
+                    <i class="fa fa-address-card-o fa-2x text-white"></i>
+                </div>
+                <h5 class="font-weight-bold mt-0" title="Number of Orders">CR en attente</h5>
+                <h4 class="mt-3 mb-3 text-white">{{$crs}}</h4>
+                
+            </div>
+        </div>
+    </div>
+
+    {{-- MES Factures --}}
+    <div class="col-xl-4 col-md-4">
+        <div class="card text-white mb-4 py-1" style="background-color: #ffa604;">
+            <div class="card-body card-widget">
+                <div class="float-right">
+                    <i class="icon-credit-card fa-2x text-white"></i>
+                </div>
+                <h5 class="font-weight-bold mt-0" title="Number of Orders">Factures en attente</h5>
+                <h4 class="mt-3 mb-3 text-white">0</h4>
+                
             </div>
         </div>
     </div>

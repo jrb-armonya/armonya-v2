@@ -29,12 +29,12 @@ $("._status").change(function() {
                         console.log(data);
                         selectPartenaire.empty();
                         for(i=0; i<data.length; i++) {
-                            if(oldPartenaires.includes(data[i].id)){
-                                selectPartenaire.append("<option disabled value='" + data[i].id + "'>"+ data[i].name +"</option>")
-                            }
-                            else{
+                            // if(oldPartenaires.includes(data[i].id)){
+                            //     selectPartenaire.append("<option disabled value='" + data[i].id + "'>"+ data[i].name +"</option>")
+                            // }
+                            // else{
                                 selectPartenaire.append("<option value='" + data[i].id + "'>"+ data[i].name +"</option>")
-                            }
+                            // }
                          }
                     }
                 })

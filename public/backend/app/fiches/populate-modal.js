@@ -152,4 +152,42 @@ function populateModal(data) {
         getReportUser(data.id);
         // console.log(reportedUser);
     }
+
+
+
+    // CR ZONE
+    let crZone = $("#cr-zone");
+
+    if(crZone.length !== 0) {
+        crZone.empty();
+        $('#id-for-cr').val(data.id)
+	    for(i=0; i<data.crs.length; i++) {
+            let color = 'warning';
+
+            if(data.crs[i].state == "Ciblé") {
+                color = 'success';
+            }
+            
+		    crZone.append(`
+		        <li class="media">
+                    <a href="#" class="pull-left">
+                        <img width="50" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxcve5VkCws5NlUSM5bo7UhJ3zeP3GscYxHqaXGb4KWJo3EB_rFw&s" alt="" class="img-circle">
+                    </a>
+                    <div class="media-body">
+                        <span class="text-muted pull-right">
+                            <small class="text-muted">${data.crs[i].created_at}</small>
+                        </span>
+                        <strong class="text-success">@${data.crs[i].from_armonya ? 'Armonya' :  'Partenaire'}</strong>
+                        <small class="badge badge-${color}">${data.crs[i].state}</small>
+                        <p>
+                            ${data.crs[i].cr}
+                        </p>
+                    </div>
+                </li>
+		    `)
+	    }
+
+    }
+
+
 }

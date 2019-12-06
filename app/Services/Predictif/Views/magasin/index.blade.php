@@ -83,5 +83,6 @@
     </script>
     <script src="{{ asset('/backend/assets/vendor/input-mask/jquery.inputmask.bundle.js') }}"></script>
     <script src="{{ asset('/backend/assets/vendor/js-init/init-input-mask.js') }}"></script>
+    <script src="{{ asset('/backend/app/generator/magazin.js')}} "></script>
 
 @endsection

@@ -41,6 +41,7 @@
     @yield('css')
     <!--custom styles-->
     <link href="{{ asset('/backend/assets/css/main.css') }}" rel="stylesheet">
+    <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
     <style>
         
@@ -78,6 +79,7 @@
     </div>
 
 <!--basic scripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/jquery/jquery.min.js') }}"></script>
@@ -91,7 +93,7 @@
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/sparkline/jquery.sparkline.js') }}"></script>
 <!--sparkline initialization-->
 <script type="text/javascript" src="{{ asset('backend/assets/vendor/js-init/sparkline/init-sparkline.js') }}"></script>
-@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 7)
+@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 7 || Auth::user()->role_id == 9 || Auth::user()->role_id == 5)
 <script type="text/javascript" src="{{ asset('backend/app/right-sidebar.js') }}"></script>
 @endif
 
@@ -101,6 +103,8 @@
 
 <script type="text/javascript" src="{{ asset('backend/assets/js/scripts.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/backend/assets/js/search.js') }}"></script>
+
+
 <script>
 // disable Enter event on all forms expect the textareas
 $(document).ready(function() {
@@ -119,6 +123,28 @@ $(document).ready(function() {
 $('.fiche-input').attr('autocomplete', 'off');
 
 </script>
+
+<script src="{{ asset('backend/app/notifications.js') }}"></script>
+
+@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 9)
+  <script>
+
+  // Enable pusher logging - don't include this in production
+  // Pusher.logToConsole = true;
+
+  let pusher = new Pusher('9921784148646f12205a', {
+    cluster: 'eu',
+    forceTLS: true
+  });
+
+  let channel = pusher.subscribe('cr-from-part-user' + {{Auth::user()->id}});
+
+  channel.bind('Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', function(data) {
+    receiveCRNotification();
+  });
+
+</script>
+@endif
 
 <div class="loader"></div>
 </body>

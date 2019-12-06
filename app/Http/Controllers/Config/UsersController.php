@@ -75,6 +75,9 @@ class UsersController extends Controller
     public function delete(Request $request)
     {
         $user = User::find($request->id);
+        $user->email = $user->id . '-' . $user->email;
+        $user->save();
+        
         $user->delete();
         return $user;
     }
@@ -98,6 +101,29 @@ class UsersController extends Controller
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
         return Redirect()->back();
+    }
+
+    public function myNotifications()
+    {
+        $user = Auth::user();
+
+        $unread = $user->unreadNotifications->sortByDesc('updated_at');
+
+        $read = $user->notifications()->where('read_at', '!=', null)->limit(5)->get()->sortByDesc('created_at');
+
+        return [$unread, $read];
+
+    }
+
+    public function markAllNotificationsAsRead()
+    {
+        $partenaire = Auth::user();
+        
+        foreach($partenaire->unreadNotifications as $notification) {
+            $notification->markAsRead();
+        }
+
+        return response()->json(200);
     }
 
 }

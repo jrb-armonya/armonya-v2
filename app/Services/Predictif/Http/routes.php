@@ -29,6 +29,9 @@ Route::group(['namespace' => 'App\Services\Predictif\Http\Controllers', 'prefix'
      */
     Route::get('/generator', 'PredictifController@index');
 
+    /** ======= Ajax get unused numbers ========= */
+    Route::get('/generator/unusedNumbers', 'UnusedNumbersController@get');
+
     /** ======= Files ========= */
     Route::post('/files/datatable', "DataTables\FileDataTable@getData")->name('get.data.file');
 

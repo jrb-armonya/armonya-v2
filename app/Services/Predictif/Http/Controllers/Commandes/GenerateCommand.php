@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Predictif\Http\Controllers\Commandes;
 
 use Illuminate\Http\Request;
@@ -10,7 +11,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Services\Predictif\Repositories\Files\FileRepository;
 use App\Services\Predictif\Repositories\Phones\PhoneRepository;
 
-class GenerateCommand extends Controller{
+class GenerateCommand extends Controller
+{
 
     /**
      * @var PhoneRepository
@@ -46,11 +48,9 @@ class GenerateCommand extends Controller{
      * @param PhoneRepository $phone
      * @param FileRepository  $file
      */
-    public function __construct(PhoneRepository $phone, FileRepository $file)
+    public function __construct(PhoneRepository $phone)
     {
-        $this->initPhp();
         $this->phone = $phone;
-        $this->file = $file;
     }
 
     /**
@@ -76,28 +76,17 @@ class GenerateCommand extends Controller{
         // save the file
         $file->save();
 
-//        $columnArray = array_chunk($phones_to_generate, 1);
+        //        $columnArray = array_chunk($phones_to_generate, 1);
 
         // generate to excel
         // this Class update the file too !!! BAADDDD practice
         // todo: we need to separate this class and the file update
-//        $generate = new ExcelDriver($this->phones_to_generate, $file);
+        //        $generate = new ExcelDriver($this->phones_to_generate, $file);
         $phones_to_generate = $this->phones_to_generate;
 
         $this->generateExcel($phones_to_generate, $file);
         // return the download
-//        return $generate;
-    }
-
-    /**
-     * This script is long to execute so we need to override some php configuration.
-     * set the memory_limit = -1
-     * set the max_execution_time = 0
-     */
-    protected function initPhp()
-    {
-        ini_set('memory_limit', '-1');
-        ini_set('max_execution_time', 0);
+        //        return $generate;
     }
 
     /**
@@ -107,7 +96,6 @@ class GenerateCommand extends Controller{
     protected function getData($nbr)
     {
         $this->nbr = $nbr;
-        $this->randomPhones = $this->phone->getRandomPhones($this->nbr);
     }
 
     /**
@@ -115,10 +103,9 @@ class GenerateCommand extends Controller{
      */
     protected function generatePhoneArrayShuffled()
     {
-        foreach($this->randomPhones as $phone) {
+        foreach ($this->randomPhones as $phone) {
             array_push($this->phones_to_generate, [$phone->nbr, $phone->societe->adresse, $phone->societe->name]);
         }
-        shuffle($this->phones_to_generate);
     }
 
     /**
@@ -133,21 +120,18 @@ class GenerateCommand extends Controller{
     protected function generateExcel($phones_to_generate, $file)
     {
         $streamedResponse = new StreamedResponse();
-        $streamedResponse->setCallback(function () use($phones_to_generate) {
+        $streamedResponse->setCallback(function () use ($phones_to_generate) {
             $spreadsheet = new Spreadsheet();
-            $spreadsheet->getActiveSheet()->fromArray($phones_to_generate, NULL,'A1');
+            $spreadsheet->getActiveSheet()->fromArray($phones_to_generate, NULL, 'A1');
             $writer =  new Xlsx($spreadsheet);
             return $writer->save('php://output');
         });
         $streamedResponse->setStatusCode(Response::HTTP_OK);
-        $streamedResponse->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        $streamedResponse->headers->set('Content-Disposition', 'attachment; filename="'. $file->name .'.xlsx"');
+        $streamedResponse->headers->set('Content-Disposition', 'attachment; filename="' . $file->name . '.xlsx"');
 
         $file->generated = 1;
         $file->save();
 
         return $streamedResponse->send();
     }
-
-
 }

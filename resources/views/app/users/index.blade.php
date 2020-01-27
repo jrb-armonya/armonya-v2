@@ -11,9 +11,6 @@
     {{-- DataTable --}}
     @include('app.users.tables.index')
 
-    {{-- MODAL Update --}}
-    @include('app.users.modals.update')
-    
     {{-- Confirm Delete User --}}
     @include('app.users.modals.confirm-delete')
 

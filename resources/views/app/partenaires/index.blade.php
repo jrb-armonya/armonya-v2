@@ -11,7 +11,6 @@
     
     {{-- DataTable --}}
     @include('app.partenaires.tables.index')
-    @include('app.partenaires.modals.confirm-delete')
     
 @endsection
     

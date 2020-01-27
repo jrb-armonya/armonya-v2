@@ -16,15 +16,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        # Set the timezone for Africa\Tunis
-        # http://php.net/manual/fr/timezones.africa.php
-        date_default_timezone_set('Africa/Tunis');
-
-        # app('hostLocation') to know the host in all the application
-        // $this->app->bind('hostLocation', function(){
-        //     return $_SERVER['HTTP_HOST'];
-        // });
-
         Schema::defaultStringLength(191);
     }
 
